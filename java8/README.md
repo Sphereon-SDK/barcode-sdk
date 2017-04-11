@@ -105,10 +105,10 @@ Class | Method | HTTP request | Description
 
  - [Barcode](docs/Barcode.md)
  - [BarcodeCoordinate](docs/BarcodeCoordinate.md)
- - [ConversionTask](docs/ConversionTask.md)
  - [DetectorJob](docs/DetectorJob.md)
  - [DetectorJobResponse](docs/DetectorJobResponse.md)
  - [DetectorJobSettings](docs/DetectorJobSettings.md)
+ - [DetectorTask](docs/DetectorTask.md)
  - [Error](docs/Error.md)
  - [ErrorResponse](docs/ErrorResponse.md)
  - [Lifecycle](docs/Lifecycle.md)

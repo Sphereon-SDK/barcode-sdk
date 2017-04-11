@@ -1,4 +1,4 @@
-# Sphereon.SDK.Barcode.Model.ConversionTask
+# Sphereon.SDK.Barcode.Model.DetectorTask
 ## Properties
 
 Name | Type | Description | Notes

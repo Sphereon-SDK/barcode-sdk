@@ -48,7 +48,7 @@ namespace Sphereon.SDK.Barcode.Model
         /// Initializes a new instance of the <see cref="DetectorJob" /> class.
         /// </summary>
         /// <param name="JobId">The server generated job jobId. This jobId is checked against the jobId in the request path on every invocation (required).</param>
-        /// <param name="Settings">The settings to use during the conversion job.</param>
+        /// <param name="Settings">Settings.</param>
         public DetectorJob(string JobId = null, DetectorJobSettings Settings = null)
         {
             // to ensure "JobId" is required (not null)
@@ -70,9 +70,8 @@ namespace Sphereon.SDK.Barcode.Model
         [DataMember(Name="jobId", EmitDefaultValue=false)]
         public string JobId { get; set; }
         /// <summary>
-        /// The settings to use during the conversion job
+        /// Gets or Sets Settings
         /// </summary>
-        /// <value>The settings to use during the conversion job</value>
         [DataMember(Name="settings", EmitDefaultValue=false)]
         public DetectorJobSettings Settings { get; set; }
         /// <summary>

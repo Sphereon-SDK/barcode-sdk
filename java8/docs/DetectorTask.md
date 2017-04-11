@@ -1,5 +1,5 @@
 
-# ConversionTask
+# DetectorTask
 
 ## Properties
 Name | Type | Description | Notes

@@ -28,8 +28,8 @@ package com.sphereon.sdk.barcode.model;
 import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
 import com.sphereon.sdk.barcode.model.Barcode;
-import com.sphereon.sdk.barcode.model.ConversionTask;
 import com.sphereon.sdk.barcode.model.DetectorJob;
+import com.sphereon.sdk.barcode.model.DetectorTask;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
@@ -41,7 +41,7 @@ import java.util.List;
  * The Detector job. Has access to the job settings as well as engine tasks
  */
 @ApiModel(description = "The Detector job. Has access to the job settings as well as engine tasks")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-07T14:40:52.787+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
 public class DetectorJobResponse   {
   @SerializedName("barcodeResults")
   private List<Barcode> barcodeResults = new ArrayList<Barcode>();
@@ -62,7 +62,7 @@ public class DetectorJobResponse   {
   private OffsetDateTime updateTime = null;
 
   @SerializedName("readerTasks")
-  private List<ConversionTask> readerTasks = new ArrayList<ConversionTask>();
+  private List<DetectorTask> readerTasks = new ArrayList<DetectorTask>();
 
   @SerializedName("job")
   private DetectorJob job = null;
@@ -198,12 +198,12 @@ public class DetectorJobResponse   {
     return updateTime;
   }
 
-  public DetectorJobResponse readerTasks(List<ConversionTask> readerTasks) {
+  public DetectorJobResponse readerTasks(List<DetectorTask> readerTasks) {
     this.readerTasks = readerTasks;
     return this;
   }
 
-  public DetectorJobResponse addReaderTasksItem(ConversionTask readerTasksItem) {
+  public DetectorJobResponse addReaderTasksItem(DetectorTask readerTasksItem) {
     this.readerTasks.add(readerTasksItem);
     return this;
   }
@@ -213,11 +213,11 @@ public class DetectorJobResponse   {
    * @return readerTasks
   **/
   @ApiModelProperty(example = "null", value = "")
-  public List<ConversionTask> getReaderTasks() {
+  public List<DetectorTask> getReaderTasks() {
     return readerTasks;
   }
 
-  public void setReaderTasks(List<ConversionTask> readerTasks) {
+  public void setReaderTasks(List<DetectorTask> readerTasks) {
     this.readerTasks = readerTasks;
   }
 

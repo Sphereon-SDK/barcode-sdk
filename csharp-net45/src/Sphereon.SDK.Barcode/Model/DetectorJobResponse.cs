@@ -97,7 +97,7 @@ namespace Sphereon.SDK.Barcode.Model
         /// <param name="Inputs">The original input files. Currently supported inputs are: tif files (required).</param>
         /// <param name="ReaderTasks">ReaderTasks.</param>
         /// <param name="Job">Job.</param>
-        public DetectorJobResponse(List<Barcode> BarcodeResults = null, string JobId = null, List<string> Inputs = null, List<ConversionTask> ReaderTasks = null, DetectorJob Job = null)
+        public DetectorJobResponse(List<Barcode> BarcodeResults = null, string JobId = null, List<string> Inputs = null, List<DetectorTask> ReaderTasks = null, DetectorJob Job = null)
         {
             // to ensure "Inputs" is required (not null)
             if (Inputs == null)
@@ -153,7 +153,7 @@ namespace Sphereon.SDK.Barcode.Model
         /// Gets or Sets ReaderTasks
         /// </summary>
         [DataMember(Name="readerTasks", EmitDefaultValue=false)]
-        public List<ConversionTask> ReaderTasks { get; set; }
+        public List<DetectorTask> ReaderTasks { get; set; }
         /// <summary>
         /// Gets or Sets Job
         /// </summary>

@@ -44,56 +44,6 @@ public class BarcodeDetectorApiTest {
 
     private final BarcodeDetectorApi api = new BarcodeDetectorApi();
 
-
-    /**
-     * Upload the file
-     *
-     * Upload the  image.
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void uploadFileTest() throws ApiException {
-        File stream = null;
-        // DetectorJobResponse response = api.uploadFile(stream);
-
-        // TODO: test validations
-    }
-
-    /**
-     * Submit Detector job for processing
-     *
-     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void submitJobTest() throws ApiException {
-        String jobid = null;
-        DetectorJob job = null;
-        // DetectorJobResponse response = api.submitJob(jobid, job);
-
-        // TODO: test validations
-    }
-
-    /**
-     * Job definition and state
-     *
-     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void getJobTest() throws ApiException {
-        String jobid = null;
-        // DetectorJobResponse response = api.getJob(jobid);
-
-        // TODO: test validations
-    }
-
     
     /**
      * Delete a job manually
@@ -111,9 +61,53 @@ public class BarcodeDetectorApiTest {
         // TODO: test validations
     }
     
+    /**
+     * Job definition and state
+     *
+     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getJobTest() throws ApiException {
+        String jobid = null;
+        // DetectorJobResponse response = api.getJob(jobid);
 
+        // TODO: test validations
+    }
     
+    /**
+     * Submit Detector job for processing
+     *
+     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void submitJobTest() throws ApiException {
+        String jobid = null;
+        DetectorJob job = null;
+        // DetectorJobResponse response = api.submitJob(jobid, job);
 
+        // TODO: test validations
+    }
+    
+    /**
+     * Upload the file
+     *
+     * Upload the  image.
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void uploadFileTest() throws ApiException {
+        File stream = null;
+        // DetectorJobResponse response = api.uploadFile(stream);
 
+        // TODO: test validations
+    }
     
 }

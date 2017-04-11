@@ -50,9 +50,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BarcodeDetectorApi {
-    public static final String PREFIX = "";
-    //Original public static final String PREFIX = "/barcode/1.0.0/";
-
     private ApiClient apiClient;
 
     public BarcodeDetectorApi() {
@@ -71,6 +68,9 @@ public class BarcodeDetectorApi {
         this.apiClient = apiClient;
     }
 
+    String PREFIX = "";
+    //String PREFIX = "/barcode/1.0.0";
+
     /* Build call for deleteJob */
     private com.squareup.okhttp.Call deleteJobCall(String jobid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
@@ -82,7 +82,8 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = (PREFIX + "barcode/detector/{jobid}").replaceAll("\\{format\\}","json")
+
+        String localVarPath = (PREFIX + "/barcode/detector/{jobid}").replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -189,7 +190,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = (PREFIX + "barcode/detector/{jobid}").replaceAll("\\{format\\}","json")
+        String localVarPath = PREFIX + "/barcode/detector/{jobid}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -301,7 +302,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = (PREFIX + "barcode/detector/{jobid}").replaceAll("\\{format\\}","json")
+        String localVarPath = PREFIX + "/barcode/detector/{jobid}".replaceAll("\\{format\\}","json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -411,7 +412,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = (PREFIX + "barcode/detector").replaceAll("\\{format\\}","json");
+        String localVarPath = PREFIX + "/barcode/detector".replaceAll("\\{format\\}","json");
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
 

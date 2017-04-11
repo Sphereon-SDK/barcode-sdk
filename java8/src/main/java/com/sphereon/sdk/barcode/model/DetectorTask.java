@@ -34,10 +34,10 @@ import java.util.List;
 
 
 /**
- * ConversionTask
+ * DetectorTask
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-07T14:40:52.787+02:00")
-public class ConversionTask   {
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
+public class DetectorTask   {
   @SerializedName("jobId")
   private String jobId = null;
 
@@ -142,12 +142,12 @@ public class ConversionTask   {
     return engine;
   }
 
-  public ConversionTask inputs(List<String> inputs) {
+  public DetectorTask inputs(List<String> inputs) {
     this.inputs = inputs;
     return this;
   }
 
-  public ConversionTask addInputsItem(String inputsItem) {
+  public DetectorTask addInputsItem(String inputsItem) {
     this.inputs.add(inputsItem);
     return this;
   }
@@ -201,14 +201,14 @@ public class ConversionTask   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ConversionTask conversionTask = (ConversionTask) o;
-    return Objects.equals(this.jobId, conversionTask.jobId) &&
-        Objects.equals(this.queueId, conversionTask.queueId) &&
-        Objects.equals(this.engine, conversionTask.engine) &&
-        Objects.equals(this.inputs, conversionTask.inputs) &&
-        Objects.equals(this.documentId, conversionTask.documentId) &&
-        Objects.equals(this.url, conversionTask.url) &&
-        Objects.equals(this.status, conversionTask.status);
+    DetectorTask detectorTask = (DetectorTask) o;
+    return Objects.equals(this.jobId, detectorTask.jobId) &&
+        Objects.equals(this.queueId, detectorTask.queueId) &&
+        Objects.equals(this.engine, detectorTask.engine) &&
+        Objects.equals(this.inputs, detectorTask.inputs) &&
+        Objects.equals(this.documentId, detectorTask.documentId) &&
+        Objects.equals(this.url, detectorTask.url) &&
+        Objects.equals(this.status, detectorTask.status);
   }
 
   @Override
@@ -219,7 +219,7 @@ public class ConversionTask   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ConversionTask {\n");
+    sb.append("class DetectorTask {\n");
     
     sb.append("    jobId: ").append(toIndentedString(jobId)).append("\n");
     sb.append("    queueId: ").append(toIndentedString(queueId)).append("\n");

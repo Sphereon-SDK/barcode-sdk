@@ -116,6 +116,6 @@ public class BarcodeDetectorApiTests {
 
 
     private String getServiceUrl() {
-        return "http://localhost:18197/";
+        return "http://localhost:18197";
     }
 }

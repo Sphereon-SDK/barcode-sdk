@@ -34,10 +34,10 @@ using Newtonsoft.Json.Converters;
 namespace Sphereon.SDK.Barcode.Model
 {
     /// <summary>
-    /// ConversionTask
+    /// DetectorTask
     /// </summary>
     [DataContract]
-    public partial class ConversionTask :  IEquatable<ConversionTask>
+    public partial class DetectorTask :  IEquatable<DetectorTask>
     {
         /// <summary>
         /// The Engine being used
@@ -118,10 +118,10 @@ namespace Sphereon.SDK.Barcode.Model
         [DataMember(Name="status", EmitDefaultValue=false)]
         public StatusEnum? Status { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConversionTask" /> class.
+        /// Initializes a new instance of the <see cref="DetectorTask" /> class.
         /// </summary>
         /// <param name="Inputs">The names of the supplied files/inputs.</param>
-        public ConversionTask(List<string> Inputs = null)
+        public DetectorTask(List<string> Inputs = null)
         {
             this.Inputs = Inputs;
         }
@@ -163,7 +163,7 @@ namespace Sphereon.SDK.Barcode.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ConversionTask {\n");
+            sb.Append("class DetectorTask {\n");
             sb.Append("  JobId: ").Append(JobId).Append("\n");
             sb.Append("  QueueId: ").Append(QueueId).Append("\n");
             sb.Append("  Engine: ").Append(Engine).Append("\n");
@@ -192,15 +192,15 @@ namespace Sphereon.SDK.Barcode.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as ConversionTask);
+            return this.Equals(obj as DetectorTask);
         }
 
         /// <summary>
-        /// Returns true if ConversionTask instances are equal
+        /// Returns true if DetectorTask instances are equal
         /// </summary>
-        /// <param name="other">Instance of ConversionTask to be compared</param>
+        /// <param name="other">Instance of DetectorTask to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ConversionTask other)
+        public bool Equals(DetectorTask other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

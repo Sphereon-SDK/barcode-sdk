@@ -30,7 +30,7 @@ import com.sphereon.sdk.barcode.handler.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-07T14:40:52.787+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
 public class OAuth implements Authentication {
   private String accessToken;
 
