@@ -1,0 +1,428 @@
+{
+  "basePath": "/",
+  "paths": {
+    "/barcode/1.0.0/barcode/detector": {"post": {
+      "summary": "Upload the file",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Upload the  image.",
+      "operationId": "uploadFile",
+      "responses": {"200": {
+        "schema": {"$ref": "#/definitions/DetectorJobResponse"},
+        "description": "File uploaded successfully. Detector job created but not started yet"
+      }},
+      "parameters": [{
+        "in": "formData",
+        "name": "stream",
+        "description": "The first image.",
+        "type": "file",
+        "required": true
+      }],
+      "tags": ["BarcodeDetector"],
+      "consumes": ["multipart/form-data"]
+    }},
+    "/barcode/1.0.0/barcode/detector/{jobid}": {
+      "get": {
+        "summary": "Job definition and state",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Get the Detector job definition and current state. Please note that you can differentiate based on http response status",
+        "operationId": "getJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
+            "description": "Detector job returned and Job is done or in error"
+          },
+          "202": {
+            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
+            "description": "Detector job returned and Job is still processing"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid job id"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "jobid",
+          "description": "jobid",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["BarcodeDetector"],
+        "consumes": ["application/json"]
+      },
+      "delete": {
+        "summary": "Delete a job manually",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Delete the Detector job and all related files",
+        "operationId": "deleteJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
+            "description": "Detector job returned and Job is done or in error"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Could not delete all parts"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid job id"
+          }
+        },
+        "parameters": [{
+          "in": "path",
+          "name": "jobid",
+          "description": "jobid",
+          "type": "string",
+          "required": true
+        }],
+        "tags": ["BarcodeDetector"],
+        "consumes": ["application/json"]
+      },
+      "put": {
+        "summary": "Submit Detector job for processing",
+        "security": [{"oauth2schema": ["global"]}],
+        "produces": ["application/json;charset=UTF-8"],
+        "description": "Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request",
+        "operationId": "submitJob",
+        "responses": {
+          "200": {
+            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
+            "description": "Detection job submitted"
+          },
+          "400": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Resubmitted job not allowed because the job is currently processing or already processed and had status DONE"
+          },
+          "404": {
+            "schema": {"$ref": "#/definitions/ErrorResponse"},
+            "description": "Invalid job id"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "jobid",
+            "description": "jobid",
+            "type": "string",
+            "required": true
+          },
+          {
+            "schema": {"$ref": "#/definitions/DetectorJob"},
+            "in": "body",
+            "name": "job",
+            "description": "jobEntity",
+            "required": true
+          }
+        ],
+        "tags": ["BarcodeDetector"],
+        "consumes": ["application/json;charset=UTF-8"]
+      }
+    }
+  },
+  "host": "gw.api.cloud.sphereon.com",
+  "schemes": ["https"],
+  "securityDefinitions": {"oauth2schema": {
+    "tokenUrl": "https://gw.api.cloud.sphereon.com/token",
+    "scopes": {"global": "accessEverything"},
+    "type": "oauth2",
+    "flow": "application"
+  }},
+  "definitions": {
+    "Barcode": {
+      "type": "object",
+      "properties": {
+        "confidenceLevel": {
+          "format": "double",
+          "type": "number"
+        },
+        "pageNo": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "coordinates": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/BarcodeCoordinate"}
+        },
+        "text": {"type": "string"},
+        "type": {
+          "type": "string",
+          "enum": [
+            "AZTEC",
+            "CODABAR",
+            "CODE_39",
+            "CODE_39_EXTENDED",
+            "CODE_93",
+            "CODE_128",
+            "DATA_MATRIX",
+            "EAN_8",
+            "EAN_13",
+            "ITF",
+            "MAXICODE",
+            "PDF_417",
+            "QR_CODE",
+            "RSS_14",
+            "RSS_EXPANDED",
+            "UPC_A",
+            "UPC_E",
+            "UPC_EAN_EXTENSION",
+            "IDENTCODE",
+            "INTERLEAVED25"
+          ]
+        }
+      }
+    },
+    "DetectorJobSettings": {
+      "description": "Barcode detection settings",
+      "type": "object",
+      "properties": {
+        "lifecycle": {"$ref": "#/definitions/Lifecycle"},
+        "outputFileName": {"type": "string"},
+        "engine": {
+          "type": "string",
+          "enum": [
+            "BASIC",
+            "ADVANCED",
+            "PREMIUM"
+          ]
+        },
+        "outputFileFormat": {
+          "type": "string",
+          "enum": ["JSON"]
+        }
+      }
+    },
+    "Lifecycle": {
+      "description": "Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after retrieval of the file",
+      "type": "object",
+      "properties": {
+        "actionTime": {
+          "format": "date-time",
+          "description": "The time at which the job and files will be deleted, regardless of whether it has been retrieved or not. Maximal time is 1 day from job creation",
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": ["DELETE"]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "RETRIEVAL",
+            "TIME"
+          ]
+        }
+      }
+    },
+    "Error": {
+      "description": "An error",
+      "type": "object",
+      "required": [
+        "code",
+        "level",
+        "message"
+      ],
+      "properties": {
+        "code": {"type": "string"},
+        "level": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "FATAL"
+          ]
+        },
+        "cause": {"$ref": "#/definitions/Error"},
+        "message": {"type": "string"}
+      }
+    },
+    "DetectorJobResponse": {
+      "description": "The Detector job. Has access to the job settings as well as engine tasks",
+      "type": "object",
+      "required": [
+        "inputs",
+        "status"
+      ],
+      "properties": {
+        "barcodeResults": {
+          "description": "The returned barcodes",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/Barcode"}
+        },
+        "completionTime": {
+          "format": "date-time",
+          "description": "The completion date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "jobId": {"type": "string"},
+        "creationTime": {
+          "format": "date-time",
+          "description": "The creation date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "inputs": {
+          "description": "The original input files. Currently supported inputs are: tif files",
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "updateTime": {
+          "format": "date-time",
+          "description": "The last update date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "readerTasks": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/DetectorTask"}
+        },
+        "job": {"$ref": "#/definitions/DetectorJob"},
+        "statusMessage": {
+          "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
+          "readOnly": true,
+          "type": "string"
+        },
+        "queueTime": {
+          "format": "date-time",
+          "description": "The reader queue date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the job",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "INPUTS_UPLOADED",
+            "PROCESSING",
+            "DONE",
+            "ERROR",
+            "DELETED"
+          ]
+        }
+      }
+    },
+    "DetectorJob": {
+      "description": "The Detector job. Has access to the job settings.",
+      "type": "object",
+      "required": ["jobId"],
+      "properties": {
+        "jobId": {
+          "description": "The server generated job jobId. This jobId is checked against the jobId in the request path on every invocation",
+          "type": "string"
+        },
+        "settings": {"$ref": "#/definitions/DetectorJobSettings"}
+      }
+    },
+    "DetectorTask": {
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "The current job Id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "queueId": {
+          "description": "The queue Id provided by a backend system",
+          "readOnly": true,
+          "type": "string"
+        },
+        "engine": {
+          "description": "The Engine being used",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "ADVANCED",
+            "PREMIUM",
+            "BASIC"
+          ]
+        },
+        "inputs": {
+          "description": "The names of the supplied files/inputs",
+          "readOnly": true,
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "documentId": {
+          "description": "The document Id provided by a backend system",
+          "readOnly": true,
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL on the bucketstore for the Barcode file. Only available once the status is DONE",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the Detector task itself",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "REQUESTED",
+            "QUEUED",
+            "PROCESSING",
+            "DONE",
+            "ERROR"
+          ]
+        }
+      }
+    },
+    "BarcodeCoordinate": {
+      "type": "object",
+      "properties": {
+        "anchor": {
+          "type": "string",
+          "enum": [
+            "LEFT_TOP",
+            "RIGHT_TOP",
+            "LEFT_BOTTOM",
+            "RIGHT_BOTTOM",
+            "CENTER",
+            "UNKNOWN"
+          ]
+        },
+        "x": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "y": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response",
+      "type": "object",
+      "properties": {"errors": {
+        "type": "array",
+        "items": {"$ref": "#/definitions/Error"}
+      }}
+    }
+  },
+  "swagger": "2.0",
+  "info": {
+    "license": {
+      "name": "Apache License Version 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "contact": {
+      "name": "Sphereon DevOps Team",
+      "url": "https://sphereon.com",
+      "email": "dev@sphereon.com"
+    },
+    "description": "<b>The Barcode Detection API 'barcode/detector' converts barcodes from image files to JSON files.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. First upload an image using the /barcode/detector POST endpoint. You will get back a job response that contains a job with its associated settings.\r\n2. Start the job from a PUT request to the /barcode/detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.\r\n3. Check the job status from the /barcode/detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version\r\n4. Retrieve the JSON file using the /barcode/detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
+    "termsOfService": "https://sphereon.com",
+    "title": "Barcode ",
+    "version": "1.0.0"
+  },
+  "tags": [{
+    "name": "BarcodeDetector",
+    "description": "Barcode detection API"
+  }]
+}
