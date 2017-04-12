@@ -25,19 +25,18 @@
 
 package com.sphereon.sdk.barcode.model;
 
-import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
-import com.sphereon.sdk.barcode.model.BarcodeCoordinate;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
  * Barcode
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-12T10:59:35.870+02:00")
 public class Barcode   {
   @SerializedName("confidenceLevel")
   private Double confidenceLevel = null;
@@ -52,7 +51,7 @@ public class Barcode   {
   private String text = null;
 
   /**
-   * Gets or Sets type
+   * The type of the barcode
    */
   public enum TypeEnum {
     @SerializedName("AZTEC")
@@ -136,10 +135,10 @@ public class Barcode   {
   }
 
    /**
-   * Get confidenceLevel
+    * The confidence level of the barcode
    * @return confidenceLevel
   **/
-  @ApiModelProperty(example = "null", value = "")
+   @ApiModelProperty(example = "null", value = "The confidence level of the barcode")
   public Double getConfidenceLevel() {
     return confidenceLevel;
   }
@@ -154,10 +153,10 @@ public class Barcode   {
   }
 
    /**
-   * Get pageNo
+    * The number of the page the barcode is on
    * @return pageNo
   **/
-  @ApiModelProperty(example = "null", value = "")
+   @ApiModelProperty(example = "null", value = "The number of the page the barcode is on")
   public Integer getPageNo() {
     return pageNo;
   }
@@ -177,10 +176,10 @@ public class Barcode   {
   }
 
    /**
-   * Get coordinates
+    * The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.
    * @return coordinates
   **/
-  @ApiModelProperty(example = "null", value = "")
+   @ApiModelProperty(example = "null", value = "The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.")
   public List<BarcodeCoordinate> getCoordinates() {
     return coordinates;
   }
@@ -195,10 +194,10 @@ public class Barcode   {
   }
 
    /**
-   * Get text
+    * The text of the barcode
    * @return text
   **/
-  @ApiModelProperty(example = "null", value = "")
+   @ApiModelProperty(example = "null", value = "The text of the barcode")
   public String getText() {
     return text;
   }
@@ -213,10 +212,10 @@ public class Barcode   {
   }
 
    /**
-   * Get type
+    * The type of the barcode
    * @return type
   **/
-  @ApiModelProperty(example = "null", value = "")
+   @ApiModelProperty(example = "null", value = "The type of the barcode")
   public TypeEnum getType() {
     return type;
   }

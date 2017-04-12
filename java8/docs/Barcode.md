@@ -4,11 +4,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**confidenceLevel** | **Double** |  |  [optional]
-**pageNo** | **Integer** |  |  [optional]
-**coordinates** | [**List&lt;BarcodeCoordinate&gt;**](BarcodeCoordinate.md) |  |  [optional]
-**text** | **String** |  |  [optional]
-**type** | [**TypeEnum**](#TypeEnum) |  |  [optional]
+**confidenceLevel** | **Double** | The confidence level of the barcode |  [optional]
+**pageNo** | **Integer** | The number of the page the barcode is on |  [optional]
+**coordinates** | [**List&lt;BarcodeCoordinate&gt;**](BarcodeCoordinate.md) | The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor. |  [optional]
+**text** | **String** | The text of the barcode |  [optional]
+**type** | [**TypeEnum**](#TypeEnum) | The type of the barcode |  [optional]
 
 
 <a name="TypeEnum"></a>

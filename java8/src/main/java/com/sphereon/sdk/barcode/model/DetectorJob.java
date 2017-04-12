@@ -25,18 +25,18 @@
 
 package com.sphereon.sdk.barcode.model;
 
-import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
-import com.sphereon.sdk.barcode.model.DetectorJobSettings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.Objects;
 
 
 /**
  * The Detector job. Has access to the job settings.
  */
 @ApiModel(description = "The Detector job. Has access to the job settings.")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-12T10:59:35.870+02:00")
 public class DetectorJob   {
   @SerializedName("jobId")
   private String jobId = null;

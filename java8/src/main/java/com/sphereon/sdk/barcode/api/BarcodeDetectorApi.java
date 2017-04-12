@@ -25,24 +25,13 @@
 
 package com.sphereon.sdk.barcode.api;
 
-import com.sphereon.sdk.barcode.handler.ApiCallback;
-import com.sphereon.sdk.barcode.handler.ApiClient;
-import com.sphereon.sdk.barcode.handler.ApiException;
-import com.sphereon.sdk.barcode.handler.ApiResponse;
-import com.sphereon.sdk.barcode.handler.Configuration;
-import com.sphereon.sdk.barcode.handler.Pair;
-import com.sphereon.sdk.barcode.handler.ProgressRequestBody;
-import com.sphereon.sdk.barcode.handler.ProgressResponseBody;
-
 import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-
-import com.sphereon.sdk.barcode.model.DetectorJobResponse;
-import com.sphereon.sdk.barcode.model.ErrorResponse;
+import com.sphereon.sdk.barcode.handler.*;
 import com.sphereon.sdk.barcode.model.DetectorJob;
-import java.io.File;
+import com.sphereon.sdk.barcode.model.DetectorJobResponse;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +40,8 @@ import java.util.Map;
 
 public class BarcodeDetectorApi {
     private ApiClient apiClient;
+    private final static String PREFIX = "";
+    //private final static String PREFIX = "/barcode/1.0.0";
 
     public BarcodeDetectorApi() {
         this(Configuration.getDefaultApiClient());
@@ -68,9 +59,6 @@ public class BarcodeDetectorApi {
         this.apiClient = apiClient;
     }
 
-    String PREFIX = "";
-    //String PREFIX = "/barcode/1.0.0";
-
     /* Build call for deleteJob */
     private com.squareup.okhttp.Call deleteJobCall(String jobid, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
@@ -82,8 +70,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-
-        String localVarPath = (PREFIX + "/barcode/detector/{jobid}").replaceAll("\\{format\\}","json")
+        String localVarPath = PREFIX + "/barcode/detector/{jobid}".replaceAll("\\{format\\}", "json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -122,7 +109,7 @@ public class BarcodeDetectorApi {
 
     /**
      * Delete a job manually
-     * Delete the Detector job and all related files
+     * Delete the Detector Job and all related files
      * @param jobid jobid (required)
      * @return DetectorJobResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -134,7 +121,7 @@ public class BarcodeDetectorApi {
 
     /**
      * Delete a job manually
-     * Delete the Detector job and all related files
+     * Delete the Detector Job and all related files
      * @param jobid jobid (required)
      * @return ApiResponse&lt;DetectorJobResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -147,7 +134,7 @@ public class BarcodeDetectorApi {
 
     /**
      * Delete a job manually (asynchronously)
-     * Delete the Detector job and all related files
+     * Delete the Detector Job and all related files
      * @param jobid jobid (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -341,7 +328,7 @@ public class BarcodeDetectorApi {
 
     /**
      * Submit Detector job for processing
-     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
      * @param jobid jobid (required)
      * @param job jobEntity (required)
      * @return DetectorJobResponse
@@ -354,7 +341,7 @@ public class BarcodeDetectorApi {
 
     /**
      * Submit Detector job for processing
-     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
      * @param jobid jobid (required)
      * @param job jobEntity (required)
      * @return ApiResponse&lt;DetectorJobResponse&gt;
@@ -368,7 +355,7 @@ public class BarcodeDetectorApi {
 
     /**
      * Submit Detector job for processing (asynchronously)
-     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
      * @param jobid jobid (required)
      * @param job jobEntity (required)
      * @param callback The callback to be executed when the API call finishes

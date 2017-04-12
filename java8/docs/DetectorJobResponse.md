@@ -4,13 +4,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**detectorTasks** | [**List&lt;DetectorTask&gt;**](DetectorTask.md) |  |  [optional]
 **barcodeResults** | [**List&lt;Barcode&gt;**](Barcode.md) | The returned barcodes |  [optional]
 **completionTime** | [**OffsetDateTime**](OffsetDateTime.md) | The completion date/time of this job in ISO 8601 format |  [optional]
 **jobId** | **String** |  |  [optional]
 **creationTime** | [**OffsetDateTime**](OffsetDateTime.md) | The creation date/time of this job in ISO 8601 format |  [optional]
 **inputs** | **List&lt;String&gt;** | The original input files. Currently supported inputs are: tif files | 
 **updateTime** | [**OffsetDateTime**](OffsetDateTime.md) | The last update date/time of this job in ISO 8601 format |  [optional]
-**readerTasks** | [**List&lt;DetectorTask&gt;**](DetectorTask.md) |  |  [optional]
 **job** | [**DetectorJob**](DetectorJob.md) |  |  [optional]
 **statusMessage** | **String** | A status message, which can be informational, warning or error. A message here does not indicate an error perse |  [optional]
 **queueTime** | [**OffsetDateTime**](OffsetDateTime.md) | The reader queue date/time of this job in ISO 8601 format |  [optional]

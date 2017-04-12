@@ -40,8 +40,9 @@ namespace Sphereon.SDK.Barcode.Model
     public partial class Barcode :  IEquatable<Barcode>
     {
         /// <summary>
-        /// Gets or Sets Type
+        /// The type of the barcode
         /// </summary>
+        /// <value>The type of the barcode</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -168,18 +169,19 @@ namespace Sphereon.SDK.Barcode.Model
         }
 
         /// <summary>
-        /// Gets or Sets Type
+        /// The type of the barcode
         /// </summary>
+        /// <value>The type of the barcode</value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public TypeEnum? Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="Barcode" /> class.
         /// </summary>
-        /// <param name="ConfidenceLevel">ConfidenceLevel.</param>
-        /// <param name="PageNo">PageNo.</param>
-        /// <param name="Coordinates">Coordinates.</param>
-        /// <param name="Text">Text.</param>
-        /// <param name="Type">Type.</param>
+        /// <param name="ConfidenceLevel">The confidence level of the barcode.</param>
+        /// <param name="PageNo">The number of the page the barcode is on.</param>
+        /// <param name="Coordinates">The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor..</param>
+        /// <param name="Text">The text of the barcode.</param>
+        /// <param name="Type">The type of the barcode.</param>
         public Barcode(double? ConfidenceLevel = null, int? PageNo = null, List<BarcodeCoordinate> Coordinates = null, string Text = null, TypeEnum? Type = null)
         {
             this.ConfidenceLevel = ConfidenceLevel;
@@ -190,23 +192,27 @@ namespace Sphereon.SDK.Barcode.Model
         }
         
         /// <summary>
-        /// Gets or Sets ConfidenceLevel
+        /// The confidence level of the barcode
         /// </summary>
+        /// <value>The confidence level of the barcode</value>
         [DataMember(Name="confidenceLevel", EmitDefaultValue=false)]
         public double? ConfidenceLevel { get; set; }
         /// <summary>
-        /// Gets or Sets PageNo
+        /// The number of the page the barcode is on
         /// </summary>
+        /// <value>The number of the page the barcode is on</value>
         [DataMember(Name="pageNo", EmitDefaultValue=false)]
         public int? PageNo { get; set; }
         /// <summary>
-        /// Gets or Sets Coordinates
+        /// The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.
         /// </summary>
+        /// <value>The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.</value>
         [DataMember(Name="coordinates", EmitDefaultValue=false)]
         public List<BarcodeCoordinate> Coordinates { get; set; }
         /// <summary>
-        /// Gets or Sets Text
+        /// The text of the barcode
         /// </summary>
+        /// <value>The text of the barcode</value>
         [DataMember(Name="text", EmitDefaultValue=false)]
         public string Text { get; set; }
         /// <summary>

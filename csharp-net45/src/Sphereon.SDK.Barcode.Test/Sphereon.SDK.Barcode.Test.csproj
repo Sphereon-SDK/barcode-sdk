@@ -86,7 +86,7 @@ limitations under the License.
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
       <ProjectReference Include="..\Sphereon.SDK.Barcode\Sphereon.SDK.Barcode.csproj">
-          <Project>{01E60451-E107-4474-AE08-DD0DCD17B943}</Project>
+          <Project>{E87F1BE2-C1DA-4088-9080-5F939FBEE9AA}</Project>
           <Name>Sphereon.SDK.Barcode</Name>
       </ProjectReference>
   </ItemGroup>

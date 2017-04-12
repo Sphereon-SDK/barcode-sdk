@@ -24,7 +24,7 @@ limitations under the License.
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{01E60451-E107-4474-AE08-DD0DCD17B943}</ProjectGuid>
+    <ProjectGuid>{E87F1BE2-C1DA-4088-9080-5F939FBEE9AA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sphereon.SDK.Barcode</RootNamespace>

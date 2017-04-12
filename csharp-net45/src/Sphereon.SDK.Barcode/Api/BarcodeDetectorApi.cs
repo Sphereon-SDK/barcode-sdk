@@ -40,7 +40,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector job and all related files
+        /// Delete the Detector Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -51,7 +51,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector job and all related files
+        /// Delete the Detector Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -82,7 +82,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Submit Detector job for processing
         /// </summary>
         /// <remarks>
-        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -94,7 +94,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Submit Detector job for processing
         /// </summary>
         /// <remarks>
-        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -128,7 +128,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector job and all related files
+        /// Delete the Detector Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -139,7 +139,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector job and all related files
+        /// Delete the Detector Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -170,7 +170,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Submit Detector job for processing
         /// </summary>
         /// <remarks>
-        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -182,7 +182,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Submit Detector job for processing
         /// </summary>
         /// <remarks>
-        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -323,7 +323,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector job and all related files
+        /// Delete a job manually Delete the Detector Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -335,7 +335,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector job and all related files
+        /// Delete a job manually Delete the Detector Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -400,7 +400,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector job and all related files
+        /// Delete a job manually Delete the Detector Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -413,7 +413,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector job and all related files
+        /// Delete a job manually Delete the Detector Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -633,7 +633,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -646,7 +646,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -723,7 +723,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -737,7 +737,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>

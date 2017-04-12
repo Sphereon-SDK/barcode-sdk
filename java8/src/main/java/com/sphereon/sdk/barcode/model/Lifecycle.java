@@ -25,18 +25,19 @@
 
 package com.sphereon.sdk.barcode.model;
 
-import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 
 /**
  * Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after retrieval of the file
  */
 @ApiModel(description = "Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after retrieval of the file")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-12T10:59:35.870+02:00")
 public class Lifecycle   {
   @SerializedName("actionTime")
   private OffsetDateTime actionTime = null;

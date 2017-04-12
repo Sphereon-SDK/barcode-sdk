@@ -25,24 +25,25 @@
 
 package com.sphereon.sdk.barcode.model;
 
-import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
-import com.sphereon.sdk.barcode.model.Barcode;
-import com.sphereon.sdk.barcode.model.DetectorJob;
-import com.sphereon.sdk.barcode.model.DetectorTask;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
  * The Detector job. Has access to the job settings as well as engine tasks
  */
 @ApiModel(description = "The Detector job. Has access to the job settings as well as engine tasks")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-12T10:59:35.870+02:00")
 public class DetectorJobResponse   {
+  @SerializedName("detectorTasks")
+  private List<DetectorTask> detectorTasks = new ArrayList<DetectorTask>();
+
   @SerializedName("barcodeResults")
   private List<Barcode> barcodeResults = new ArrayList<Barcode>();
 
@@ -60,9 +61,6 @@ public class DetectorJobResponse   {
 
   @SerializedName("updateTime")
   private OffsetDateTime updateTime = null;
-
-  @SerializedName("readerTasks")
-  private List<DetectorTask> readerTasks = new ArrayList<DetectorTask>();
 
   @SerializedName("job")
   private DetectorJob job = null;
@@ -106,6 +104,30 @@ public class DetectorJobResponse   {
 
   @SerializedName("status")
   private StatusEnum status = null;
+
+  public DetectorJobResponse detectorTasks(List<DetectorTask> detectorTasks) {
+    this.detectorTasks = detectorTasks;
+    return this;
+  }
+
+  public DetectorJobResponse addDetectorTasksItem(DetectorTask detectorTasksItem) {
+    this.detectorTasks.add(detectorTasksItem);
+    return this;
+  }
+
+  /**
+   * Get detectorTasks
+   *
+   * @return detectorTasks
+   **/
+  @ApiModelProperty(example = "null", value = "")
+  public List<DetectorTask> getDetectorTasks() {
+    return detectorTasks;
+  }
+
+  public void setDetectorTasks(List<DetectorTask> detectorTasks) {
+    this.detectorTasks = detectorTasks;
+  }
 
   public DetectorJobResponse barcodeResults(List<Barcode> barcodeResults) {
     this.barcodeResults = barcodeResults;
@@ -198,29 +220,6 @@ public class DetectorJobResponse   {
     return updateTime;
   }
 
-  public DetectorJobResponse readerTasks(List<DetectorTask> readerTasks) {
-    this.readerTasks = readerTasks;
-    return this;
-  }
-
-  public DetectorJobResponse addReaderTasksItem(DetectorTask readerTasksItem) {
-    this.readerTasks.add(readerTasksItem);
-    return this;
-  }
-
-   /**
-   * Get readerTasks
-   * @return readerTasks
-  **/
-  @ApiModelProperty(example = "null", value = "")
-  public List<DetectorTask> getReaderTasks() {
-    return readerTasks;
-  }
-
-  public void setReaderTasks(List<DetectorTask> readerTasks) {
-    this.readerTasks = readerTasks;
-  }
-
   public DetectorJobResponse job(DetectorJob job) {
     this.job = job;
     return this;
@@ -276,13 +275,13 @@ public class DetectorJobResponse   {
       return false;
     }
     DetectorJobResponse detectorJobResponse = (DetectorJobResponse) o;
-    return Objects.equals(this.barcodeResults, detectorJobResponse.barcodeResults) &&
+    return Objects.equals(this.detectorTasks, detectorJobResponse.detectorTasks) &&
+            Objects.equals(this.barcodeResults, detectorJobResponse.barcodeResults) &&
         Objects.equals(this.completionTime, detectorJobResponse.completionTime) &&
         Objects.equals(this.jobId, detectorJobResponse.jobId) &&
         Objects.equals(this.creationTime, detectorJobResponse.creationTime) &&
         Objects.equals(this.inputs, detectorJobResponse.inputs) &&
         Objects.equals(this.updateTime, detectorJobResponse.updateTime) &&
-        Objects.equals(this.readerTasks, detectorJobResponse.readerTasks) &&
         Objects.equals(this.job, detectorJobResponse.job) &&
         Objects.equals(this.statusMessage, detectorJobResponse.statusMessage) &&
         Objects.equals(this.queueTime, detectorJobResponse.queueTime) &&
@@ -291,21 +290,21 @@ public class DetectorJobResponse   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(barcodeResults, completionTime, jobId, creationTime, inputs, updateTime, readerTasks, job, statusMessage, queueTime, status);
+    return Objects.hash(detectorTasks, barcodeResults, completionTime, jobId, creationTime, inputs, updateTime, job, statusMessage, queueTime, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DetectorJobResponse {\n");
-    
+
+    sb.append("    detectorTasks: ").append(toIndentedString(detectorTasks)).append("\n");
     sb.append("    barcodeResults: ").append(toIndentedString(barcodeResults)).append("\n");
     sb.append("    completionTime: ").append(toIndentedString(completionTime)).append("\n");
     sb.append("    jobId: ").append(toIndentedString(jobId)).append("\n");
     sb.append("    creationTime: ").append(toIndentedString(creationTime)).append("\n");
     sb.append("    inputs: ").append(toIndentedString(inputs)).append("\n");
     sb.append("    updateTime: ").append(toIndentedString(updateTime)).append("\n");
-    sb.append("    readerTasks: ").append(toIndentedString(readerTasks)).append("\n");
     sb.append("    job: ").append(toIndentedString(job)).append("\n");
     sb.append("    statusMessage: ").append(toIndentedString(statusMessage)).append("\n");
     sb.append("    queueTime: ").append(toIndentedString(queueTime)).append("\n");

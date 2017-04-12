@@ -25,20 +25,20 @@
 
 package com.sphereon.sdk.barcode.model;
 
-import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
-import com.sphereon.sdk.barcode.model.Error;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
  * The error response
  */
 @ApiModel(description = "The error response")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-11T10:22:39.915+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-04-12T10:59:35.870+02:00")
 public class ErrorResponse   {
   @SerializedName("errors")
   private List<Error> errors = new ArrayList<Error>();

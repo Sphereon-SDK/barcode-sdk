@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Delete a job manually
 
-Delete the Detector job and all related files
+Delete the Detector Job and all related files
 
 ### Example
 ```java
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 
 Submit Detector job for processing
 
-Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the job Id in the path must match the jobId in the request
+Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
 
 ### Example
 ```java
