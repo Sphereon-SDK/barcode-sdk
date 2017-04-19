@@ -1,6 +1,6 @@
 /**
  * Barcode 
- * <b>The Barcode Detection API 'barcode/detector' converts barcodes from image files to JSON files.</b>    The flow is generally as follows:  1. First upload an image using the /barcode/detector POST endpoint. You will get back a job response that contains a job with its associated settings.  2. Start the job from a PUT request to the /barcode/detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.  3. Check the job status from the /barcode/detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version  4. Retrieve the JSON file using the /barcode/detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * <b>The Barcode Detection API '/detector' converts barcodes from image files to JSON files.</b>    The flow is generally as follows:  1. First upload an image using the /detector POST endpoint. You will get back a job response that contains a job with its associated settings.  2. Start the job from a PUT request to the /detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.  3. Check the job status from the /detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version  4. Retrieve the JSON file using the /detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
  *
  * OpenAPI spec version: 1.0.0
  * Contact: dev@sphereon.com
@@ -40,9 +40,10 @@ import java.util.Map;
 
 public class BarcodeDetectorApi {
     private ApiClient apiClient;
-    private final static String PREFIX = "";
-    //private final static String PREFIX = "/barcode/1.0.0";
 
+    private final String PREFIX = "";
+
+    //private final String PREFIX = "/barcode/1.0.0";
     public BarcodeDetectorApi() {
         this(Configuration.getDefaultApiClient());
     }
@@ -70,7 +71,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = PREFIX + "/barcode/detector/{jobid}".replaceAll("\\{format\\}", "json")
+        String localVarPath = PREFIX + "/detector/{jobid}".replaceAll("\\{format\\}", "json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -103,7 +104,7 @@ public class BarcodeDetectorApi {
             });
         }
 
-        String[] localVarAuthNames = new String[] { "oauth2schema" };
+        String[] localVarAuthNames = new String[]{};
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -177,7 +178,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = PREFIX + "/barcode/detector/{jobid}".replaceAll("\\{format\\}","json")
+        String localVarPath = PREFIX + "/detector/{jobid}".replaceAll("\\{format\\}", "json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -210,7 +211,7 @@ public class BarcodeDetectorApi {
             });
         }
 
-        String[] localVarAuthNames = new String[] { "oauth2schema" };
+        String[] localVarAuthNames = new String[]{};
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -289,7 +290,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = PREFIX + "/barcode/detector/{jobid}".replaceAll("\\{format\\}","json")
+        String localVarPath = PREFIX + "/detector/{jobid}".replaceAll("\\{format\\}", "json")
         .replaceAll("\\{" + "jobid" + "\\}", apiClient.escapeString(jobid.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -322,7 +323,7 @@ public class BarcodeDetectorApi {
             });
         }
 
-        String[] localVarAuthNames = new String[] { "oauth2schema" };
+        String[] localVarAuthNames = new String[]{};
         return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 
@@ -399,7 +400,7 @@ public class BarcodeDetectorApi {
         
 
         // create path and map variables
-        String localVarPath = PREFIX + "/barcode/detector".replaceAll("\\{format\\}","json");
+        String localVarPath = PREFIX + "/detector".replaceAll("\\{format\\}", "json");
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
 
@@ -433,7 +434,7 @@ public class BarcodeDetectorApi {
             });
         }
 
-        String[] localVarAuthNames = new String[] { "oauth2schema" };
+        String[] localVarAuthNames = new String[]{};
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
 

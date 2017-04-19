@@ -1,7 +1,7 @@
 /* 
  * Barcode 
  *
- * <b>The Barcode Detection API 'barcode/detector' converts barcodes from image files to JSON files.</b>    The flow is generally as follows:  1. First upload an image using the /barcode/detector POST endpoint. You will get back a job response that contains a job with its associated settings.  2. Start the job from a PUT request to the /barcode/detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.  3. Check the job status from the /barcode/detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version  4. Retrieve the JSON file using the /barcode/detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
+ * <b>The Barcode Detection API '/detector' converts barcodes from image files to JSON files.</b>    The flow is generally as follows:  1. First upload an image using the /detector POST endpoint. You will get back a job response that contains a job with its associated settings.  2. Start the job from a PUT request to the /detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.  3. Check the job status from the /detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version  4. Retrieve the JSON file using the /detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)      <b>Interactive testing: </b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store</a>
  *
  * OpenAPI spec version: 1.0.0
  * Contact: dev@sphereon.com
@@ -346,7 +346,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling BarcodeDetectorApi->DeleteJob");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector/{jobid}";
+            var localVarPath = "/barcode/1.0.0/detector/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -373,12 +373,6 @@ namespace Sphereon.SDK.Barcode.Api
             localVarPathParams.Add("format", "json");
             if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
@@ -424,7 +418,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling BarcodeDetectorApi->DeleteJob");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector/{jobid}";
+            var localVarPath = "/barcode/1.0.0/detector/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -451,12 +445,6 @@ namespace Sphereon.SDK.Barcode.Api
             localVarPathParams.Add("format", "json");
             if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
@@ -501,7 +489,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling BarcodeDetectorApi->GetJob");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector/{jobid}";
+            var localVarPath = "/barcode/1.0.0/detector/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -528,12 +516,6 @@ namespace Sphereon.SDK.Barcode.Api
             localVarPathParams.Add("format", "json");
             if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
@@ -579,7 +561,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (jobid == null)
                 throw new ApiException(400, "Missing required parameter 'jobid' when calling BarcodeDetectorApi->GetJob");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector/{jobid}";
+            var localVarPath = "/barcode/1.0.0/detector/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -606,12 +588,6 @@ namespace Sphereon.SDK.Barcode.Api
             localVarPathParams.Add("format", "json");
             if (jobid != null) localVarPathParams.Add("jobid", Configuration.ApiClient.ParameterToString(jobid)); // path parameter
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
@@ -661,7 +637,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (job == null)
                 throw new ApiException(400, "Missing required parameter 'job' when calling BarcodeDetectorApi->SubmitJob");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector/{jobid}";
+            var localVarPath = "/barcode/1.0.0/detector/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -696,12 +672,6 @@ namespace Sphereon.SDK.Barcode.Api
                 localVarPostBody = job; // byte array
             }
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
@@ -752,7 +722,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (job == null)
                 throw new ApiException(400, "Missing required parameter 'job' when calling BarcodeDetectorApi->SubmitJob");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector/{jobid}";
+            var localVarPath = "/barcode/1.0.0/detector/{jobid}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -787,12 +757,6 @@ namespace Sphereon.SDK.Barcode.Api
                 localVarPostBody = job; // byte array
             }
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
@@ -837,7 +801,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling BarcodeDetectorApi->UploadFile");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector";
+            var localVarPath = "/barcode/1.0.0/detector";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -864,12 +828,6 @@ namespace Sphereon.SDK.Barcode.Api
             localVarPathParams.Add("format", "json");
             if (stream != null) localVarFileParams.Add("stream", Configuration.ApiClient.ParameterToFile("stream", stream));
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
@@ -915,7 +873,7 @@ namespace Sphereon.SDK.Barcode.Api
             if (stream == null)
                 throw new ApiException(400, "Missing required parameter 'stream' when calling BarcodeDetectorApi->UploadFile");
 
-            var localVarPath = "/barcode/1.0.0/barcode/detector";
+            var localVarPath = "/barcode/1.0.0/detector";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -942,12 +900,6 @@ namespace Sphereon.SDK.Barcode.Api
             localVarPathParams.Add("format", "json");
             if (stream != null) localVarFileParams.Add("stream", Configuration.ApiClient.ParameterToFile("stream", stream));
 
-            // authentication (oauth2schema) required
-            // oauth required
-            if (!String.IsNullOrEmpty(Configuration.AccessToken))
-            {
-                localVarHeaderParams["Authorization"] = "Bearer " + Configuration.AccessToken;
-            }
 
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,

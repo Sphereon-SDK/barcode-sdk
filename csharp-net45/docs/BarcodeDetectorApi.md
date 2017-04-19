@@ -4,10 +4,10 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteJob**](BarcodeDetectorApi.md#deletejob) | **DELETE** /barcode/1.0.0/barcode/detector/{jobid} | Delete a job manually
-[**GetJob**](BarcodeDetectorApi.md#getjob) | **GET** /barcode/1.0.0/barcode/detector/{jobid} | Job definition and state
-[**SubmitJob**](BarcodeDetectorApi.md#submitjob) | **PUT** /barcode/1.0.0/barcode/detector/{jobid} | Submit Detector job for processing
-[**UploadFile**](BarcodeDetectorApi.md#uploadfile) | **POST** /barcode/1.0.0/barcode/detector | Upload the file
+[**DeleteJob**](BarcodeDetectorApi.md#deletejob) | **DELETE** /barcode/1.0.0/detector/{jobid} | Delete a job manually
+[**GetJob**](BarcodeDetectorApi.md#getjob) | **GET** /barcode/1.0.0/detector/{jobid} | Job definition and state
+[**SubmitJob**](BarcodeDetectorApi.md#submitjob) | **PUT** /barcode/1.0.0/detector/{jobid} | Submit Detector job for processing
+[**UploadFile**](BarcodeDetectorApi.md#uploadfile) | **POST** /barcode/1.0.0/detector | Upload the file
 
 
 <a name="deletejob"></a>
@@ -33,9 +33,6 @@ namespace Example
         public void main()
         {
             
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
             var apiInstance = new BarcodeDetectorApi();
             var jobid = jobid_example;  // string | jobid
 
@@ -66,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 
@@ -98,9 +95,6 @@ namespace Example
         public void main()
         {
             
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
             var apiInstance = new BarcodeDetectorApi();
             var jobid = jobid_example;  // string | jobid
 
@@ -131,7 +125,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 
@@ -163,9 +157,6 @@ namespace Example
         public void main()
         {
             
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
             var apiInstance = new BarcodeDetectorApi();
             var jobid = jobid_example;  // string | jobid
             var job = new DetectorJob(); // DetectorJob | jobEntity
@@ -198,7 +189,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 
@@ -230,9 +221,6 @@ namespace Example
         public void main()
         {
             
-            // Configure OAuth2 access token for authorization: oauth2schema
-            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
-
             var apiInstance = new BarcodeDetectorApi();
             var stream = new System.IO.Stream(); // System.IO.Stream | The first image.
 
@@ -263,7 +251,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 

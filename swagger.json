@@ -1,9 +1,9 @@
 {
   "basePath": "/",
   "paths": {
-    "/barcode/1.0.0/barcode/detector": {"post": {
+    "/barcode/1.0.0/detector": {
+      "post": {
       "summary": "Upload the file",
-      "security": [{"oauth2schema": ["global"]}],
       "produces": ["application/json;charset=UTF-8"],
       "description": "Upload the  image.",
       "operationId": "uploadFile",
@@ -21,10 +21,9 @@
       "tags": ["BarcodeDetector"],
       "consumes": ["multipart/form-data"]
     }},
-    "/barcode/1.0.0/barcode/detector/{jobid}": {
+    "/barcode/1.0.0/detector/{jobid}": {
       "get": {
         "summary": "Job definition and state",
-        "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
         "description": "Get the Detector job definition and current state. Please note that you can differentiate based on http response status",
         "operationId": "getJob",
@@ -54,7 +53,6 @@
       },
       "delete": {
         "summary": "Delete a job manually",
-        "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
         "description": "Delete the Detector Job and all related files",
         "operationId": "deleteJob",
@@ -84,7 +82,6 @@
       },
       "put": {
         "summary": "Submit Detector job for processing",
-        "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
         "description": "Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request",
         "operationId": "submitJob",
@@ -224,28 +221,6 @@
         }
       }
     },
-    "Error": {
-      "description": "An error",
-      "type": "object",
-      "required": [
-        "code",
-        "level",
-        "message"
-      ],
-      "properties": {
-        "code": {"type": "string"},
-        "level": {
-          "type": "string",
-          "enum": [
-            "INFO",
-            "WARNING",
-            "FATAL"
-          ]
-        },
-        "cause": {"$ref": "#/definitions/Error"},
-        "message": {"type": "string"}
-      }
-    },
     "DetectorJobResponse": {
       "description": "The Detector job. Has access to the job settings as well as engine tasks",
       "type": "object",
@@ -326,6 +301,34 @@
           "type": "string"
         },
         "settings": {"$ref": "#/definitions/DetectorJobSettings"}
+      }
+    },
+    "Error": {
+      "description": "An error",
+      "type": "object",
+      "required": [
+        "code",
+        "level",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "FATAL"
+          ]
+        },
+        "cause": {
+          "$ref": "#/definitions/Error"
+        },
+        "message": {
+          "type": "string"
+        }
       }
     },
     "DetectorTask": {
@@ -425,7 +428,7 @@
       "url": "https://sphereon.com",
       "email": "dev@sphereon.com"
     },
-    "description": "<b>The Barcode Detection API 'barcode/detector' converts barcodes from image files to JSON files.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. First upload an image using the /barcode/detector POST endpoint. You will get back a job response that contains a job with its associated settings.\r\n2. Start the job from a PUT request to the /barcode/detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.\r\n3. Check the job status from the /barcode/detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version\r\n4. Retrieve the JSON file using the /barcode/detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
+    "description": "<b>The Barcode Detection API '/detector' converts barcodes from image files to JSON files.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. First upload an image using the /detector POST endpoint. You will get back a job response that contains a job with its associated settings.\r\n2. Start the job from a PUT request to the /detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.\r\n3. Check the job status from the /detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version\r\n4. Retrieve the JSON file using the /detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
     "termsOfService": "https://sphereon.com",
     "title": "Barcode ",
     "version": "1.0.0"

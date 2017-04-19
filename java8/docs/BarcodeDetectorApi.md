@@ -4,10 +4,10 @@ All URIs are relative to *https://gw.api.cloud.sphereon.com/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**deleteJob**](BarcodeDetectorApi.md#deleteJob) | **DELETE** /barcode/1.0.0/barcode/detector/{jobid} | Delete a job manually
-[**getJob**](BarcodeDetectorApi.md#getJob) | **GET** /barcode/1.0.0/barcode/detector/{jobid} | Job definition and state
-[**submitJob**](BarcodeDetectorApi.md#submitJob) | **PUT** /barcode/1.0.0/barcode/detector/{jobid} | Submit Detector job for processing
-[**uploadFile**](BarcodeDetectorApi.md#uploadFile) | **POST** /barcode/1.0.0/barcode/detector | Upload the file
+[**deleteJob**](BarcodeDetectorApi.md#deleteJob) | **DELETE** /barcode/1.0.0/detector/{jobid} | Delete a job manually
+[**getJob**](BarcodeDetectorApi.md#getJob) | **GET** /barcode/1.0.0/detector/{jobid} | Job definition and state
+[**submitJob**](BarcodeDetectorApi.md#submitJob) | **PUT** /barcode/1.0.0/detector/{jobid} | Submit Detector job for processing
+[**uploadFile**](BarcodeDetectorApi.md#uploadFile) | **POST** /barcode/1.0.0/detector | Upload the file
 
 
 <a name="deleteJob"></a>
@@ -21,17 +21,9 @@ Delete the Detector Job and all related files
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.sdk.barcode.handler.ApiClient;
 //import com.sphereon.sdk.barcode.handler.ApiException;
-//import com.sphereon.sdk.barcode.handler.Configuration;
-//import com.sphereon.sdk.barcode.handler.auth.*;
 //import com.sphereon.sdk.barcode.api.BarcodeDetectorApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-// Configure OAuth2 access token for authorization: oauth2schema
-OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
-oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 BarcodeDetectorApi apiInstance = new BarcodeDetectorApi();
 String jobid = "jobid_example"; // String | jobid
@@ -56,7 +48,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 
@@ -74,17 +66,9 @@ Get the Detector job definition and current state. Please note that you can diff
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.sdk.barcode.handler.ApiClient;
 //import com.sphereon.sdk.barcode.handler.ApiException;
-//import com.sphereon.sdk.barcode.handler.Configuration;
-//import com.sphereon.sdk.barcode.handler.auth.*;
 //import com.sphereon.sdk.barcode.api.BarcodeDetectorApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-// Configure OAuth2 access token for authorization: oauth2schema
-OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
-oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 BarcodeDetectorApi apiInstance = new BarcodeDetectorApi();
 String jobid = "jobid_example"; // String | jobid
@@ -109,7 +93,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 
@@ -127,17 +111,9 @@ Starts the barcode detection of the uploaded files, using the supplied settings 
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.sdk.barcode.handler.ApiClient;
 //import com.sphereon.sdk.barcode.handler.ApiException;
-//import com.sphereon.sdk.barcode.handler.Configuration;
-//import com.sphereon.sdk.barcode.handler.auth.*;
 //import com.sphereon.sdk.barcode.api.BarcodeDetectorApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-// Configure OAuth2 access token for authorization: oauth2schema
-OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
-oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 BarcodeDetectorApi apiInstance = new BarcodeDetectorApi();
 String jobid = "jobid_example"; // String | jobid
@@ -164,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 
@@ -182,17 +158,9 @@ Upload the  image.
 ### Example
 ```java
 // Import classes:
-//import com.sphereon.sdk.barcode.handler.ApiClient;
 //import com.sphereon.sdk.barcode.handler.ApiException;
-//import com.sphereon.sdk.barcode.handler.Configuration;
-//import com.sphereon.sdk.barcode.handler.auth.*;
 //import com.sphereon.sdk.barcode.api.BarcodeDetectorApi;
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-// Configure OAuth2 access token for authorization: oauth2schema
-OAuth oauth2schema = (OAuth) defaultClient.getAuthentication("oauth2schema");
-oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 
 BarcodeDetectorApi apiInstance = new BarcodeDetectorApi();
 File stream = new File("/path/to/file.txt"); // File | The first image.
@@ -217,7 +185,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oauth2schema](../README.md#oauth2schema)
+No authorization required
 
 ### HTTP request headers
 
