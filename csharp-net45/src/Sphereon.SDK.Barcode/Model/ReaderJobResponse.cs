@@ -92,12 +92,11 @@ namespace Sphereon.SDK.Barcode.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ReaderJobResponse" /> class.
         /// </summary>
-        /// <param name="DetectorTasks">DetectorTasks.</param>
         /// <param name="JobId">JobId.</param>
         /// <param name="Inputs">The original input files. Currently supported inputs are: tif files (required).</param>
-        /// <param name="Barcodes">The returned barcodes.</param>
         /// <param name="Job">Job.</param>
-        public ReaderJobResponse(List<ReaderEngineTask> DetectorTasks = null, string JobId = null, List<string> Inputs = null, List<Barcode> Barcodes = null, ReaderJob Job = null)
+        /// <param name="Tasks">The server supplied reader task(s).</param>
+        public ReaderJobResponse(string JobId = null, List<string> Inputs = null, ReaderJob Job = null, List<ReaderEngineTask> Tasks = null)
         {
             // to ensure "Inputs" is required (not null)
             if (Inputs == null)
@@ -108,17 +107,11 @@ namespace Sphereon.SDK.Barcode.Model
             {
                 this.Inputs = Inputs;
             }
-            this.DetectorTasks = DetectorTasks;
             this.JobId = JobId;
-            this.Barcodes = Barcodes;
             this.Job = Job;
+            this.Tasks = Tasks;
         }
         
-        /// <summary>
-        /// Gets or Sets DetectorTasks
-        /// </summary>
-        [DataMember(Name="detectorTasks", EmitDefaultValue=false)]
-        public List<ReaderEngineTask> DetectorTasks { get; set; }
         /// <summary>
         /// The completion date/time of this job in ISO 8601 format
         /// </summary>
@@ -149,12 +142,6 @@ namespace Sphereon.SDK.Barcode.Model
         [DataMember(Name="updateTime", EmitDefaultValue=false)]
         public DateTime? UpdateTime { get; private set; }
         /// <summary>
-        /// The returned barcodes
-        /// </summary>
-        /// <value>The returned barcodes</value>
-        [DataMember(Name="barcodes", EmitDefaultValue=false)]
-        public List<Barcode> Barcodes { get; set; }
-        /// <summary>
         /// Gets or Sets Job
         /// </summary>
         [DataMember(Name="job", EmitDefaultValue=false)]
@@ -165,6 +152,12 @@ namespace Sphereon.SDK.Barcode.Model
         /// <value>A status message, which can be informational, warning or error. A message here does not indicate an error perse</value>
         [DataMember(Name="statusMessage", EmitDefaultValue=false)]
         public string StatusMessage { get; private set; }
+        /// <summary>
+        /// The server supplied reader task(s)
+        /// </summary>
+        /// <value>The server supplied reader task(s)</value>
+        [DataMember(Name="tasks", EmitDefaultValue=false)]
+        public List<ReaderEngineTask> Tasks { get; set; }
         /// <summary>
         /// The reader queue date/time of this job in ISO 8601 format
         /// </summary>
@@ -179,15 +172,14 @@ namespace Sphereon.SDK.Barcode.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReaderJobResponse {\n");
-            sb.Append("  DetectorTasks: ").Append(DetectorTasks).Append("\n");
             sb.Append("  CompletionTime: ").Append(CompletionTime).Append("\n");
             sb.Append("  JobId: ").Append(JobId).Append("\n");
             sb.Append("  CreationTime: ").Append(CreationTime).Append("\n");
             sb.Append("  Inputs: ").Append(Inputs).Append("\n");
             sb.Append("  UpdateTime: ").Append(UpdateTime).Append("\n");
-            sb.Append("  Barcodes: ").Append(Barcodes).Append("\n");
             sb.Append("  Job: ").Append(Job).Append("\n");
             sb.Append("  StatusMessage: ").Append(StatusMessage).Append("\n");
+            sb.Append("  Tasks: ").Append(Tasks).Append("\n");
             sb.Append("  QueueTime: ").Append(QueueTime).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
@@ -227,11 +219,6 @@ namespace Sphereon.SDK.Barcode.Model
 
             return 
                 (
-                    this.DetectorTasks == other.DetectorTasks ||
-                    this.DetectorTasks != null &&
-                    this.DetectorTasks.SequenceEqual(other.DetectorTasks)
-                ) && 
-                (
                     this.CompletionTime == other.CompletionTime ||
                     this.CompletionTime != null &&
                     this.CompletionTime.Equals(other.CompletionTime)
@@ -257,11 +244,6 @@ namespace Sphereon.SDK.Barcode.Model
                     this.UpdateTime.Equals(other.UpdateTime)
                 ) && 
                 (
-                    this.Barcodes == other.Barcodes ||
-                    this.Barcodes != null &&
-                    this.Barcodes.SequenceEqual(other.Barcodes)
-                ) && 
-                (
                     this.Job == other.Job ||
                     this.Job != null &&
                     this.Job.Equals(other.Job)
@@ -270,6 +252,11 @@ namespace Sphereon.SDK.Barcode.Model
                     this.StatusMessage == other.StatusMessage ||
                     this.StatusMessage != null &&
                     this.StatusMessage.Equals(other.StatusMessage)
+                ) && 
+                (
+                    this.Tasks == other.Tasks ||
+                    this.Tasks != null &&
+                    this.Tasks.SequenceEqual(other.Tasks)
                 ) && 
                 (
                     this.QueueTime == other.QueueTime ||
@@ -294,8 +281,6 @@ namespace Sphereon.SDK.Barcode.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.DetectorTasks != null)
-                    hash = hash * 59 + this.DetectorTasks.GetHashCode();
                 if (this.CompletionTime != null)
                     hash = hash * 59 + this.CompletionTime.GetHashCode();
                 if (this.JobId != null)
@@ -306,12 +291,12 @@ namespace Sphereon.SDK.Barcode.Model
                     hash = hash * 59 + this.Inputs.GetHashCode();
                 if (this.UpdateTime != null)
                     hash = hash * 59 + this.UpdateTime.GetHashCode();
-                if (this.Barcodes != null)
-                    hash = hash * 59 + this.Barcodes.GetHashCode();
                 if (this.Job != null)
                     hash = hash * 59 + this.Job.GetHashCode();
                 if (this.StatusMessage != null)
                     hash = hash * 59 + this.StatusMessage.GetHashCode();
+                if (this.Tasks != null)
+                    hash = hash * 59 + this.Tasks.GetHashCode();
                 if (this.QueueTime != null)
                     hash = hash * 59 + this.QueueTime.GetHashCode();
                 if (this.Status != null)

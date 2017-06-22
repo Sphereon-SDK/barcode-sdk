@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteJob**](BarcodeReaderApi.md#deletejob) | **DELETE** /barcode/0.1.0/reader/{jobid} | Delete a job manually
 [**GetJob**](BarcodeReaderApi.md#getjob) | **GET** /barcode/0.1.0/reader/{jobid} | Job definition and state
-[**SubmitJob**](BarcodeReaderApi.md#submitjob) | **PUT** /barcode/0.1.0/reader/{jobid} | Submit Detector job for processing
+[**SubmitJob**](BarcodeReaderApi.md#submitjob) | **PUT** /barcode/0.1.0/reader/{jobid} | Submit job for reading
 [**UploadFile**](BarcodeReaderApi.md#uploadfile) | **POST** /barcode/0.1.0/reader | Upload the file
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Delete a job manually
 
-Delete the Detector Job and all related files
+Delete the Job and all related files
 
 ### Example
 ```csharp
@@ -77,11 +77,11 @@ Name | Type | Description  | Notes
 
 <a name="getjob"></a>
 # **GetJob**
-> ReaderJobResponse GetJob (string jobid)
+> ReaderResultJobResponse GetJob (string jobid)
 
 Job definition and state
 
-Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
 
 ### Example
 ```csharp
@@ -107,7 +107,7 @@ namespace Example
             try
             {
                 // Job definition and state
-                ReaderJobResponse result = apiInstance.GetJob(jobid);
+                ReaderResultJobResponse result = apiInstance.GetJob(jobid);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ReaderJobResponse**](ReaderJobResponse.md)
+[**ReaderResultJobResponse**](ReaderResultJobResponse.md)
 
 ### Authorization
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 # **SubmitJob**
 > ReaderJobResponse SubmitJob (string jobid, ReaderJob job)
 
-Submit Detector job for processing
+Submit job for reading
 
 Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
 
@@ -172,7 +172,7 @@ namespace Example
 
             try
             {
-                // Submit Detector job for processing
+                // Submit job for reading
                 ReaderJobResponse result = apiInstance.SubmitJob(jobid, job);
                 Debug.WriteLine(result);
             }

@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Barcode
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:38:34.566+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:36.136+02:00")
 public class Barcode {
   @SerializedName("confidenceLevel")
   private Double confidenceLevel = null;
@@ -129,11 +129,6 @@ public class Barcode {
   @SerializedName("type")
   private TypeEnum type = null;
 
-  public Barcode confidenceLevel(Double confidenceLevel) {
-    this.confidenceLevel = confidenceLevel;
-    return this;
-  }
-
    /**
    * The confidence level of the barcode
    * @return confidenceLevel
@@ -143,15 +138,6 @@ public class Barcode {
     return confidenceLevel;
   }
 
-  public void setConfidenceLevel(Double confidenceLevel) {
-    this.confidenceLevel = confidenceLevel;
-  }
-
-  public Barcode pageNo(Integer pageNo) {
-    this.pageNo = pageNo;
-    return this;
-  }
-
    /**
    * The number of the page the barcode is on
    * @return pageNo
@@ -159,10 +145,6 @@ public class Barcode {
   @ApiModelProperty(example = "null", value = "The number of the page the barcode is on")
   public Integer getPageNo() {
     return pageNo;
-  }
-
-  public void setPageNo(Integer pageNo) {
-    this.pageNo = pageNo;
   }
 
   public Barcode coordinates(List<BarcodeCoordinate> coordinates) {
@@ -188,11 +170,6 @@ public class Barcode {
     this.coordinates = coordinates;
   }
 
-  public Barcode text(String text) {
-    this.text = text;
-    return this;
-  }
-
    /**
    * The text of the barcode
    * @return text
@@ -202,15 +179,6 @@ public class Barcode {
     return text;
   }
 
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  public Barcode type(TypeEnum type) {
-    this.type = type;
-    return this;
-  }
-
    /**
    * The type of the barcode
    * @return type
@@ -218,10 +186,6 @@ public class Barcode {
   @ApiModelProperty(example = "null", value = "The type of the barcode")
   public TypeEnum getType() {
     return type;
-  }
-
-  public void setType(TypeEnum type) {
-    this.type = type;
   }
 
 

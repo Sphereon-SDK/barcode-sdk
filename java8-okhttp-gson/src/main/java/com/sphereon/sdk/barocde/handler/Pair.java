@@ -25,7 +25,7 @@
 
 package com.sphereon.sdk.barocde.handler;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:38:34.566+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:36.136+02:00")
 public class Pair {
     private String name = "";
     private String value = "";

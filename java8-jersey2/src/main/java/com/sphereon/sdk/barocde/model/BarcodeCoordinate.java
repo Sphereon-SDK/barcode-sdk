@@ -34,10 +34,10 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * BarcodeCoordinate
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:39:08.056+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:26.286+02:00")
 public class BarcodeCoordinate {
   /**
-   * Gets or Sets anchor
+   * The anchor to which the positions apply
    */
   public enum AnchorEnum {
     LEFT_TOP("LEFT_TOP"),
@@ -83,58 +83,31 @@ public class BarcodeCoordinate {
   @JsonProperty("y")
   private Integer y = null;
 
-  public BarcodeCoordinate anchor(AnchorEnum anchor) {
-    this.anchor = anchor;
-    return this;
-  }
-
    /**
-   * Get anchor
+   * The anchor to which the positions apply
    * @return anchor
   **/
-  @ApiModelProperty(example = "null", value = "")
+  @ApiModelProperty(example = "null", value = "The anchor to which the positions apply")
   public AnchorEnum getAnchor() {
     return anchor;
   }
 
-  public void setAnchor(AnchorEnum anchor) {
-    this.anchor = anchor;
-  }
-
-  public BarcodeCoordinate x(Integer x) {
-    this.x = x;
-    return this;
-  }
-
    /**
-   * Get x
+   * The X position
    * @return x
   **/
-  @ApiModelProperty(example = "null", value = "")
+  @ApiModelProperty(example = "null", value = "The X position")
   public Integer getX() {
     return x;
   }
 
-  public void setX(Integer x) {
-    this.x = x;
-  }
-
-  public BarcodeCoordinate y(Integer y) {
-    this.y = y;
-    return this;
-  }
-
    /**
-   * Get y
+   * The Y position
    * @return y
   **/
-  @ApiModelProperty(example = "null", value = "")
+  @ApiModelProperty(example = "null", value = "The Y position")
   public Integer getY() {
     return y;
-  }
-
-  public void setY(Integer y) {
-    this.y = y;
   }
 
 

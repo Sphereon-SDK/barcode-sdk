@@ -40,8 +40,9 @@ namespace Sphereon.SDK.Barcode.Model
     public partial class BarcodeCoordinate :  IEquatable<BarcodeCoordinate>
     {
         /// <summary>
-        /// Gets or Sets Anchor
+        /// The anchor to which the positions apply
         /// </summary>
+        /// <value>The anchor to which the positions apply</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum AnchorEnum
         {
@@ -84,33 +85,31 @@ namespace Sphereon.SDK.Barcode.Model
         }
 
         /// <summary>
-        /// Gets or Sets Anchor
+        /// The anchor to which the positions apply
         /// </summary>
+        /// <value>The anchor to which the positions apply</value>
         [DataMember(Name="anchor", EmitDefaultValue=false)]
         public AnchorEnum? Anchor { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="BarcodeCoordinate" /> class.
         /// </summary>
-        /// <param name="Anchor">Anchor.</param>
-        /// <param name="X">X.</param>
-        /// <param name="Y">Y.</param>
-        public BarcodeCoordinate(AnchorEnum? Anchor = null, int? X = null, int? Y = null)
+        [JsonConstructorAttribute]
+        public BarcodeCoordinate()
         {
-            this.Anchor = Anchor;
-            this.X = X;
-            this.Y = Y;
         }
         
         /// <summary>
-        /// Gets or Sets X
+        /// The X position
         /// </summary>
+        /// <value>The X position</value>
         [DataMember(Name="x", EmitDefaultValue=false)]
-        public int? X { get; set; }
+        public int? X { get; private set; }
         /// <summary>
-        /// Gets or Sets Y
+        /// The Y position
         /// </summary>
+        /// <value>The Y position</value>
         [DataMember(Name="y", EmitDefaultValue=false)]
-        public int? Y { get; set; }
+        public int? Y { get; private set; }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

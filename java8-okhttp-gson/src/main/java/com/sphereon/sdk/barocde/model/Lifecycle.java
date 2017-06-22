@@ -35,7 +35,7 @@ import java.time.OffsetDateTime;
  * Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after retrieval of the file
  */
 @ApiModel(description = "Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after retrieval of the file")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:38:34.566+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:36.136+02:00")
 public class Lifecycle {
   @SerializedName("actionTime")
   private OffsetDateTime actionTime = null;

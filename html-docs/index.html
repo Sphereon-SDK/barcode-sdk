@@ -708,12 +708,14 @@ margin-bottom: 20px;
     "confidenceLevel" : {
       "type" : "number",
       "format" : "double",
-      "description" : "The confidence level of the barcode"
+      "description" : "The confidence level of the barcode",
+      "readOnly" : true
     },
     "pageNo" : {
       "type" : "integer",
       "format" : "int32",
-      "description" : "The number of the page the barcode is on"
+      "description" : "The number of the page the barcode is on",
+      "readOnly" : true
     },
     "coordinates" : {
       "type" : "array",
@@ -724,11 +726,13 @@ margin-bottom: 20px;
     },
     "text" : {
       "type" : "string",
-      "description" : "The text of the barcode"
+      "description" : "The text of the barcode",
+      "readOnly" : true
     },
     "type" : {
       "type" : "string",
       "description" : "The type of the barcode",
+      "readOnly" : true,
       "enum" : [ "AZTEC", "CODABAR", "CODE_39", "CODE_39_EXTENDED", "CODE_93", "CODE_128", "DATA_MATRIX", "EAN_8", "EAN_13", "ITF", "MAXICODE", "PDF_417", "QR_CODE", "RSS_14", "RSS_EXPANDED", "UPC_A", "UPC_E", "UPC_EAN_EXTENSION", "IDENTCODE", "INTERLEAVED25" ]
     }
   }
@@ -738,15 +742,21 @@ margin-bottom: 20px;
   "properties" : {
     "anchor" : {
       "type" : "string",
+      "description" : "The anchor to which the positions apply",
+      "readOnly" : true,
       "enum" : [ "LEFT_TOP", "RIGHT_TOP", "LEFT_BOTTOM", "RIGHT_BOTTOM", "CENTER", "UNKNOWN" ]
     },
     "x" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "int32",
+      "description" : "The X position",
+      "readOnly" : true
     },
     "y" : {
       "type" : "integer",
-      "format" : "int32"
+      "format" : "int32",
+      "description" : "The Y position",
+      "readOnly" : true
     }
   }
 };
@@ -863,12 +873,88 @@ margin-bottom: 20px;
   "type" : "object",
   "required" : [ "inputs", "status" ],
   "properties" : {
-    "detectorTasks" : {
+    "completionTime" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "The completion date/time of this job in ISO 8601 format",
+      "readOnly" : true
+    },
+    "jobId" : {
+      "type" : "string"
+    },
+    "creationTime" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "The creation date/time of this job in ISO 8601 format",
+      "readOnly" : true
+    },
+    "inputs" : {
       "type" : "array",
+      "description" : "The original input files. Currently supported inputs are: tif files",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "updateTime" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "The last update date/time of this job in ISO 8601 format",
+      "readOnly" : true
+    },
+    "job" : {
+      "$ref" : "#/definitions/ReaderJob"
+    },
+    "statusMessage" : {
+      "type" : "string",
+      "description" : "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
+      "readOnly" : true
+    },
+    "tasks" : {
+      "type" : "array",
+      "description" : "The server supplied reader task(s)",
       "items" : {
         "$ref" : "#/definitions/ReaderEngineTask"
       }
     },
+    "queueTime" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "The reader queue date/time of this job in ISO 8601 format",
+      "readOnly" : true
+    },
+    "status" : {
+      "type" : "string",
+      "description" : "The status of the job",
+      "readOnly" : true,
+      "enum" : [ "INPUTS_UPLOADED", "PROCESSING", "DONE", "ERROR", "DELETED" ]
+    }
+  },
+  "description" : "The Reader job response. Has access to the job, it' s settings as well as engine tasks"
+};
+  defs.ReaderJobSettings = {
+  "type" : "object",
+  "properties" : {
+    "lifecycle" : {
+      "$ref" : "#/definitions/Lifecycle"
+    },
+    "outputFileName" : {
+      "type" : "string"
+    },
+    "engine" : {
+      "type" : "string",
+      "enum" : [ "BASIC", "ADVANCED", "PREMIUM" ]
+    },
+    "outputFileFormat" : {
+      "type" : "string",
+      "enum" : [ "JSON" ]
+    }
+  },
+  "description" : "Barcode reader settings"
+};
+  defs.ReaderResultJobResponse = {
+  "type" : "object",
+  "required" : [ "barcodes", "inputs", "status" ],
+  "properties" : {
     "completionTime" : {
       "type" : "string",
       "format" : "date-time",
@@ -912,6 +998,13 @@ margin-bottom: 20px;
       "description" : "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
       "readOnly" : true
     },
+    "tasks" : {
+      "type" : "array",
+      "description" : "The server supplied reader task(s)",
+      "items" : {
+        "$ref" : "#/definitions/ReaderEngineTask"
+      }
+    },
     "queueTime" : {
       "type" : "string",
       "format" : "date-time",
@@ -926,26 +1019,6 @@ margin-bottom: 20px;
     }
   },
   "description" : "The Reader job response. Has access to the job, it' s settings as well as engine tasks"
-};
-  defs.ReaderJobSettings = {
-  "type" : "object",
-  "properties" : {
-    "lifecycle" : {
-      "$ref" : "#/definitions/Lifecycle"
-    },
-    "outputFileName" : {
-      "type" : "string"
-    },
-    "engine" : {
-      "type" : "string",
-      "enum" : [ "BASIC", "ADVANCED", "PREMIUM" ]
-    },
-    "outputFileFormat" : {
-      "type" : "string",
-      "enum" : [ "JSON" ]
-    }
-  },
-  "description" : "Barcode reader settings"
 };
   </script>
 
@@ -1029,7 +1102,7 @@ margin-bottom: 20px;
                                             <div class="clearfix"></div>
 
                                             <p></p>
-                                            <p>Delete the Detector Job and all related files</p>
+                                            <p>Delete the Job and all related files</p>
                                             <p></p>
                                             <br />
 
@@ -1314,7 +1387,7 @@ try {
 
                                             <h2>Responses</h2>
 
-                                                <h3> Status: 200 - Detector job is deleted </h3>
+                                                <h3> Status: 200 - Job is deleted </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
@@ -1345,7 +1418,7 @@ try {
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "Detector job is deleted",
+  "description" : "Job is deleted",
   "schema" : {
     "$ref" : "#/definitions/ReaderJobResponse"
   }
@@ -1581,7 +1654,7 @@ try {
                                             <div class="clearfix"></div>
 
                                             <p></p>
-                                            <p>Get the Detector job definition and current state. Please note that you can differentiate based on http response status</p>
+                                            <p>Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status</p>
                                             <p></p>
                                             <br />
 
@@ -1652,7 +1725,7 @@ public class BarcodeReaderApiExample {
         BarcodeReaderApi apiInstance = new BarcodeReaderApi();
         String jobid = jobid_example; // String | jobid
         try {
-            ReaderJobResponse result = apiInstance.getJob(jobid);
+            ReaderResultJobResponse result = apiInstance.getJob(jobid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling BarcodeReaderApi#getJob");
@@ -1675,7 +1748,7 @@ public class BarcodeReaderApiExample {
         BarcodeReaderApi apiInstance = new BarcodeReaderApi();
         String jobid = jobid_example; // String | jobid
         try {
-            ReaderJobResponse result = apiInstance.getJob(jobid);
+            ReaderResultJobResponse result = apiInstance.getJob(jobid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling BarcodeReaderApi#getJob");
@@ -1707,7 +1780,7 @@ BarcodeReaderApi *apiInstance = [[BarcodeReaderApi alloc] init];
 
 // Job definition and state
 [apiInstance getJobWith:jobid
-              completionHandler: ^(ReaderJobResponse output, NSError* error) {
+              completionHandler: ^(ReaderResultJobResponse output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1772,7 +1845,7 @@ namespace Example
             try
             {
                 // Job definition and state
-                ReaderJobResponse result = apiInstance.getJob(jobid);
+                ReaderResultJobResponse result = apiInstance.getJob(jobid);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1866,7 +1939,7 @@ try {
 
                                             <h2>Responses</h2>
 
-                                                <h3> Status: 200 - Detector job returned and Job is done or in error </h3>
+                                                <h3> Status: 200 - Read job returned and Job is done or in error </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
@@ -1897,9 +1970,9 @@ try {
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "Detector job returned and Job is done or in error",
+  "description" : "Read job returned and Job is done or in error",
   "schema" : {
-    "$ref" : "#/definitions/ReaderJobResponse"
+    "$ref" : "#/definitions/ReaderResultJobResponse"
   }
 };
                                                                     var schema = schemaWrapper.schema;
@@ -1945,7 +2018,7 @@ try {
 
 
 
-                                                <h3> Status: 202 - Detector job returned and Job is still processing </h3>
+                                                <h3> Status: 202 - Read job returned and Job is still processing </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
@@ -1976,7 +2049,7 @@ try {
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "Detector job returned and Job is still processing",
+  "description" : "Read job returned and Job is still processing",
   "schema" : {
     "$ref" : "#/definitions/ReaderJobResponse"
   }
@@ -2260,7 +2333,7 @@ ReaderJob *job = ; // jobEntity
 
 BarcodeReaderApi *apiInstance = [[BarcodeReaderApi alloc] init];
 
-// Submit Detector job for processing
+// Submit job for reading
 [apiInstance submitJobWith:jobid
     job:job
               completionHandler: ^(ReaderJobResponse output, NSError* error) {
@@ -2330,7 +2403,7 @@ namespace Example
 
             try
             {
-                // Submit Detector job for processing
+                // Submit job for reading
                 ReaderJobResponse result = apiInstance.submitJob(jobid, job);
                 Debug.WriteLine(result);
             }
@@ -2479,7 +2552,7 @@ try {
 
                                             <h2>Responses</h2>
 
-                                                <h3> Status: 200 - Detection job submitted </h3>
+                                                <h3> Status: 200 - Read job submitted </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
@@ -2510,7 +2583,7 @@ try {
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "Detection job submitted",
+  "description" : "Read job submitted",
   "schema" : {
     "$ref" : "#/definitions/ReaderJobResponse"
   }
@@ -2990,7 +3063,7 @@ try {
 
                                             <h2>Responses</h2>
 
-                                                <h3> Status: 200 - File uploaded successfully. Detector job created but not started yet </h3>
+                                                <h3> Status: 200 - File uploaded successfully. Reader job created but not started yet </h3>
 
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
@@ -3021,7 +3094,7 @@ try {
                                                             <script>
                                                                 $(document).ready(function() {
                                                                     var schemaWrapper = {
-  "description" : "File uploaded successfully. Detector job created but not started yet",
+  "description" : "File uploaded successfully. Reader job created but not started yet",
   "schema" : {
     "$ref" : "#/definitions/ReaderJobResponse"
   }
@@ -3106,7 +3179,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2017-06-21T02:39:28.091+02:00
+                    Generated 2017-06-22T18:15:46.604+02:00
                 </div>
             </div>
         </div>

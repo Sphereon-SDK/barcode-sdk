@@ -26,10 +26,7 @@
 package com.sphereon.sdk.barocde.api;
 
 import com.sphereon.sdk.barocde.handler.ApiException;
-import com.sphereon.sdk.barocde.model.Barcode;
-import com.sphereon.sdk.barocde.model.ReaderJob;
-import com.sphereon.sdk.barocde.model.ReaderJobResponse;
-import com.sphereon.sdk.barocde.model.ReaderJobSettings;
+import com.sphereon.sdk.barocde.model.*;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -74,14 +71,10 @@ public class BarcodeReaderApiTest {
         ReaderJobResponse response = api.uploadFile(stream);
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(0, response.getBarcodes().size());
         Assert.assertNotNull(response.getJobId());
         Assert.assertEquals(ReaderJobResponse.StatusEnum.INPUTS_UPLOADED, response.getStatus());
         BarcodeReaderApiTest.jobId = response.getJobId();
         BarcodeReaderApiTest.job = response.getJob();
-
-        //TODO SPMS-9 Return default engine in job response
-        BarcodeReaderApiTest.job.getSettings().engine(ReaderJobSettings.EngineEnum.ADVANCED);
     }
 
 
@@ -94,10 +87,10 @@ public class BarcodeReaderApiTest {
      */
     @Test
     public void _02_getJobTestBeforeSubmit() throws ApiException {
-        ReaderJobResponse response = api.getJob(jobId);
+        ReaderResultJobResponse response = api.getJob(jobId);
         Assert.assertNotNull(response);
         Assert.assertEquals(jobId, response.getJobId());
-        Assert.assertEquals(ReaderJobResponse.StatusEnum.INPUTS_UPLOADED, response.getStatus());
+        Assert.assertEquals(ReaderResultJobResponse.StatusEnum.INPUTS_UPLOADED, response.getStatus());
     }
 
     /**
@@ -123,17 +116,17 @@ public class BarcodeReaderApiTest {
      */
     @Test
     public void _04_getJobTestAfterSubmit() throws ApiException {
-        ReaderJobResponse response = api.getJob(jobId);
+        ReaderResultJobResponse response = api.getJob(jobId);
         Assert.assertNotNull(response);
 
         final int maxCount = 100;
         int currentCount = 0;
 
-        while (currentCount++ < maxCount && ReaderJobResponse.StatusEnum.PROCESSING == response.getStatus()) {
+        while (currentCount++ < maxCount && ReaderResultJobResponse.StatusEnum.PROCESSING == response.getStatus()) {
             response = api.getJob(jobId);
-            Assert.assertTrue(ReaderJobResponse.StatusEnum.PROCESSING == response.getStatus() || ReaderJobResponse.StatusEnum.DONE == response.getStatus());
+            Assert.assertTrue(ReaderResultJobResponse.StatusEnum.PROCESSING == response.getStatus() || ReaderResultJobResponse.StatusEnum.DONE == response.getStatus());
         }
-        Assert.assertEquals(ReaderJobResponse.StatusEnum.DONE, response.getStatus());
+        Assert.assertEquals(ReaderResultJobResponse.StatusEnum.DONE, response.getStatus());
         Assert.assertEquals(3, response.getBarcodes().size());
         Assert.assertEquals(Barcode.TypeEnum.CODE_39, response.getBarcodes().get(0).getType());
         Assert.assertEquals("++SCANUSER+NIELS", response.getBarcodes().get(0).getText());

@@ -48,7 +48,7 @@ import com.sphereon.sdk.barocde.handler.auth.HttpBasicAuth;
 import com.sphereon.sdk.barocde.handler.auth.ApiKeyAuth;
 import com.sphereon.sdk.barocde.handler.auth.OAuth;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:39:08.056+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:26.286+02:00")
 public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private String basePath = "https://gw.api.cloud.sphereon.com/";

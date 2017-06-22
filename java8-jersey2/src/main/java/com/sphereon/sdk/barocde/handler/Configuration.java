@@ -25,7 +25,7 @@
 
 package com.sphereon.sdk.barocde.handler;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:39:08.056+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:26.286+02:00")
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
 

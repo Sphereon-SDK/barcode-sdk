@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deleteJob**](BarcodeReaderApi.md#deleteJob) | **DELETE** /barcode/0.1.0/reader/{jobid} | Delete a job manually
 [**getJob**](BarcodeReaderApi.md#getJob) | **GET** /barcode/0.1.0/reader/{jobid} | Job definition and state
-[**submitJob**](BarcodeReaderApi.md#submitJob) | **PUT** /barcode/0.1.0/reader/{jobid} | Submit Detector job for processing
+[**submitJob**](BarcodeReaderApi.md#submitJob) | **PUT** /barcode/0.1.0/reader/{jobid} | Submit job for reading
 [**uploadFile**](BarcodeReaderApi.md#uploadFile) | **POST** /barcode/0.1.0/reader | Upload the file
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Delete a job manually
 
-Delete the Detector Job and all related files
+Delete the Job and all related files
 
 ### Example
 ```java
@@ -65,11 +65,11 @@ Name | Type | Description  | Notes
 
 <a name="getJob"></a>
 # **getJob**
-> ReaderJobResponse getJob(jobid)
+> ReaderResultJobResponse getJob(jobid)
 
 Job definition and state
 
-Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
 
 ### Example
 ```java
@@ -89,7 +89,7 @@ oauth2schema.setAccessToken("YOUR ACCESS TOKEN");
 BarcodeReaderApi apiInstance = new BarcodeReaderApi();
 String jobid = "jobid_example"; // String | jobid
 try {
-    ReaderJobResponse result = apiInstance.getJob(jobid);
+    ReaderResultJobResponse result = apiInstance.getJob(jobid);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling BarcodeReaderApi#getJob");
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ReaderJobResponse**](ReaderJobResponse.md)
+[**ReaderResultJobResponse**](ReaderResultJobResponse.md)
 
 ### Authorization
 
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 # **submitJob**
 > ReaderJobResponse submitJob(jobid, job)
 
-Submit Detector job for processing
+Submit job for reading
 
 Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
 

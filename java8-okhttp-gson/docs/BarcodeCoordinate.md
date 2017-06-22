@@ -4,9 +4,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**anchor** | [**AnchorEnum**](#AnchorEnum) |  |  [optional]
-**x** | **Integer** |  |  [optional]
-**y** | **Integer** |  |  [optional]
+**anchor** | [**AnchorEnum**](#AnchorEnum) | The anchor to which the positions apply |  [optional]
+**x** | **Integer** | The X position |  [optional]
+**y** | **Integer** | The Y position |  [optional]
 
 
 <a name="AnchorEnum"></a>

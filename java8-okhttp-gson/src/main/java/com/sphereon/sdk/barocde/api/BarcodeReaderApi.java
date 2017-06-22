@@ -40,6 +40,7 @@ import java.io.IOException;
 
 import com.sphereon.sdk.barocde.model.ReaderJobResponse;
 import com.sphereon.sdk.barocde.model.ErrorResponse;
+import com.sphereon.sdk.barocde.model.ReaderResultJobResponse;
 import com.sphereon.sdk.barocde.model.ReaderJob;
 import java.io.File;
 
@@ -118,7 +119,7 @@ public class BarcodeReaderApi {
 
     /**
      * Delete a job manually
-     * Delete the Detector Job and all related files
+     * Delete the Job and all related files
      * @param jobid jobid (required)
      * @return ReaderJobResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -130,7 +131,7 @@ public class BarcodeReaderApi {
 
     /**
      * Delete a job manually
-     * Delete the Detector Job and all related files
+     * Delete the Job and all related files
      * @param jobid jobid (required)
      * @return ApiResponse&lt;ReaderJobResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -143,7 +144,7 @@ public class BarcodeReaderApi {
 
     /**
      * Delete a job manually (asynchronously)
-     * Delete the Detector Job and all related files
+     * Delete the Job and all related files
      * @param jobid jobid (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
@@ -225,38 +226,38 @@ public class BarcodeReaderApi {
 
     /**
      * Job definition and state
-     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+     * Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
      * @param jobid jobid (required)
-     * @return ReaderJobResponse
+     * @return ReaderResultJobResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ReaderJobResponse getJob(String jobid) throws ApiException {
-        ApiResponse<ReaderJobResponse> resp = getJobWithHttpInfo(jobid);
+    public ReaderResultJobResponse getJob(String jobid) throws ApiException {
+        ApiResponse<ReaderResultJobResponse> resp = getJobWithHttpInfo(jobid);
         return resp.getData();
     }
 
     /**
      * Job definition and state
-     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+     * Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
      * @param jobid jobid (required)
-     * @return ApiResponse&lt;ReaderJobResponse&gt;
+     * @return ApiResponse&lt;ReaderResultJobResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ReaderJobResponse> getJobWithHttpInfo(String jobid) throws ApiException {
+    public ApiResponse<ReaderResultJobResponse> getJobWithHttpInfo(String jobid) throws ApiException {
         com.squareup.okhttp.Call call = getJobCall(jobid, null, null);
-        Type localVarReturnType = new TypeToken<ReaderJobResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<ReaderResultJobResponse>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
     /**
      * Job definition and state (asynchronously)
-     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+     * Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
      * @param jobid jobid (required)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call getJobAsync(String jobid, final ApiCallback<ReaderJobResponse> callback) throws ApiException {
+    public com.squareup.okhttp.Call getJobAsync(String jobid, final ApiCallback<ReaderResultJobResponse> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -278,7 +279,7 @@ public class BarcodeReaderApi {
         }
 
         com.squareup.okhttp.Call call = getJobCall(jobid, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<ReaderJobResponse>(){}.getType();
+        Type localVarReturnType = new TypeToken<ReaderResultJobResponse>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
@@ -336,7 +337,7 @@ public class BarcodeReaderApi {
     }
 
     /**
-     * Submit Detector job for processing
+     * Submit job for reading
      * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
      * @param jobid jobid (required)
      * @param job jobEntity (required)
@@ -349,7 +350,7 @@ public class BarcodeReaderApi {
     }
 
     /**
-     * Submit Detector job for processing
+     * Submit job for reading
      * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
      * @param jobid jobid (required)
      * @param job jobEntity (required)
@@ -363,7 +364,7 @@ public class BarcodeReaderApi {
     }
 
     /**
-     * Submit Detector job for processing (asynchronously)
+     * Submit job for reading (asynchronously)
      * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
      * @param jobid jobid (required)
      * @param job jobEntity (required)

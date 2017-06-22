@@ -25,17 +25,18 @@
 
 package com.sphereon.sdk.barocde.model;
 
-import java.util.Objects;
 import com.google.gson.annotations.SerializedName;
 import com.sphereon.sdk.barocde.model.ReaderJobSettings;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Objects;
+
 /**
  * The Detector job. Has access to the job settings.
  */
 @ApiModel(description = "The Detector job. Has access to the job settings.")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:38:34.566+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:36.136+02:00")
 public class ReaderJob {
   @SerializedName("jobId")
   private String jobId = null;

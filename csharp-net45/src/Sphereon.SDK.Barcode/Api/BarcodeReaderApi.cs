@@ -40,7 +40,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector Job and all related files
+        /// Delete the Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -51,7 +51,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector Job and all related files
+        /// Delete the Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -61,25 +61,25 @@ namespace Sphereon.SDK.Barcode.Api
         /// Job definition and state
         /// </summary>
         /// <remarks>
-        /// Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>ReaderJobResponse</returns>
-        ReaderJobResponse GetJob (string jobid);
+        /// <returns>ReaderResultJobResponse</returns>
+        ReaderResultJobResponse GetJob (string jobid);
 
         /// <summary>
         /// Job definition and state
         /// </summary>
         /// <remarks>
-        /// Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>ApiResponse of ReaderJobResponse</returns>
-        ApiResponse<ReaderJobResponse> GetJobWithHttpInfo (string jobid);
+        /// <returns>ApiResponse of ReaderResultJobResponse</returns>
+        ApiResponse<ReaderResultJobResponse> GetJobWithHttpInfo (string jobid);
         /// <summary>
-        /// Submit Detector job for processing
+        /// Submit job for reading
         /// </summary>
         /// <remarks>
         /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
@@ -91,7 +91,7 @@ namespace Sphereon.SDK.Barcode.Api
         ReaderJobResponse SubmitJob (string jobid, ReaderJob job);
 
         /// <summary>
-        /// Submit Detector job for processing
+        /// Submit job for reading
         /// </summary>
         /// <remarks>
         /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
@@ -128,7 +128,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector Job and all related files
+        /// Delete the Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -139,7 +139,7 @@ namespace Sphereon.SDK.Barcode.Api
         /// Delete a job manually
         /// </summary>
         /// <remarks>
-        /// Delete the Detector Job and all related files
+        /// Delete the Job and all related files
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -149,25 +149,25 @@ namespace Sphereon.SDK.Barcode.Api
         /// Job definition and state
         /// </summary>
         /// <remarks>
-        /// Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>Task of ReaderJobResponse</returns>
-        System.Threading.Tasks.Task<ReaderJobResponse> GetJobAsync (string jobid);
+        /// <returns>Task of ReaderResultJobResponse</returns>
+        System.Threading.Tasks.Task<ReaderResultJobResponse> GetJobAsync (string jobid);
 
         /// <summary>
         /// Job definition and state
         /// </summary>
         /// <remarks>
-        /// Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </remarks>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>Task of ApiResponse (ReaderJobResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ReaderJobResponse>> GetJobAsyncWithHttpInfo (string jobid);
+        /// <returns>Task of ApiResponse (ReaderResultJobResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ReaderResultJobResponse>> GetJobAsyncWithHttpInfo (string jobid);
         /// <summary>
-        /// Submit Detector job for processing
+        /// Submit job for reading
         /// </summary>
         /// <remarks>
         /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
@@ -179,7 +179,7 @@ namespace Sphereon.SDK.Barcode.Api
         System.Threading.Tasks.Task<ReaderJobResponse> SubmitJobAsync (string jobid, ReaderJob job);
 
         /// <summary>
-        /// Submit Detector job for processing
+        /// Submit job for reading
         /// </summary>
         /// <remarks>
         /// Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
@@ -323,7 +323,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector Job and all related files
+        /// Delete a job manually Delete the Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -335,7 +335,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector Job and all related files
+        /// Delete a job manually Delete the Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -400,7 +400,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector Job and all related files
+        /// Delete a job manually Delete the Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -413,7 +413,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Delete a job manually Delete the Detector Job and all related files
+        /// Delete a job manually Delete the Job and all related files
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -478,24 +478,24 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Job definition and state Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Job definition and state Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>ReaderJobResponse</returns>
-        public ReaderJobResponse GetJob (string jobid)
+        /// <returns>ReaderResultJobResponse</returns>
+        public ReaderResultJobResponse GetJob (string jobid)
         {
-             ApiResponse<ReaderJobResponse> localVarResponse = GetJobWithHttpInfo(jobid);
+             ApiResponse<ReaderResultJobResponse> localVarResponse = GetJobWithHttpInfo(jobid);
              return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Job definition and state Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Job definition and state Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>ApiResponse of ReaderJobResponse</returns>
-        public ApiResponse< ReaderJobResponse > GetJobWithHttpInfo (string jobid)
+        /// <returns>ApiResponse of ReaderResultJobResponse</returns>
+        public ApiResponse< ReaderResultJobResponse > GetJobWithHttpInfo (string jobid)
         {
             // verify the required parameter 'jobid' is set
             if (jobid == null)
@@ -548,32 +548,32 @@ namespace Sphereon.SDK.Barcode.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ReaderJobResponse>(localVarStatusCode,
+            return new ApiResponse<ReaderResultJobResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ReaderJobResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ReaderJobResponse)));
+                (ReaderResultJobResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ReaderResultJobResponse)));
             
         }
 
         /// <summary>
-        /// Job definition and state Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Job definition and state Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>Task of ReaderJobResponse</returns>
-        public async System.Threading.Tasks.Task<ReaderJobResponse> GetJobAsync (string jobid)
+        /// <returns>Task of ReaderResultJobResponse</returns>
+        public async System.Threading.Tasks.Task<ReaderResultJobResponse> GetJobAsync (string jobid)
         {
-             ApiResponse<ReaderJobResponse> localVarResponse = await GetJobAsyncWithHttpInfo(jobid);
+             ApiResponse<ReaderResultJobResponse> localVarResponse = await GetJobAsyncWithHttpInfo(jobid);
              return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Job definition and state Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+        /// Job definition and state Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
-        /// <returns>Task of ApiResponse (ReaderJobResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ReaderJobResponse>> GetJobAsyncWithHttpInfo (string jobid)
+        /// <returns>Task of ApiResponse (ReaderResultJobResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<ReaderResultJobResponse>> GetJobAsyncWithHttpInfo (string jobid)
         {
             // verify the required parameter 'jobid' is set
             if (jobid == null)
@@ -626,14 +626,14 @@ namespace Sphereon.SDK.Barcode.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<ReaderJobResponse>(localVarStatusCode,
+            return new ApiResponse<ReaderResultJobResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ReaderJobResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ReaderJobResponse)));
+                (ReaderResultJobResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ReaderResultJobResponse)));
             
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
+        /// Submit job for reading Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -646,7 +646,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
+        /// Submit job for reading Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -723,7 +723,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
+        /// Submit job for reading Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>
@@ -737,7 +737,7 @@ namespace Sphereon.SDK.Barcode.Api
         }
 
         /// <summary>
-        /// Submit Detector job for processing Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
+        /// Submit job for reading Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
         /// </summary>
         /// <exception cref="Sphereon.SDK.Barcode.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jobid">jobid</param>

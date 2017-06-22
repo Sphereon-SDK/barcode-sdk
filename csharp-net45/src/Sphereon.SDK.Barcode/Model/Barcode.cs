@@ -177,18 +177,10 @@ namespace Sphereon.SDK.Barcode.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Barcode" /> class.
         /// </summary>
-        /// <param name="ConfidenceLevel">The confidence level of the barcode.</param>
-        /// <param name="PageNo">The number of the page the barcode is on.</param>
         /// <param name="Coordinates">The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor..</param>
-        /// <param name="Text">The text of the barcode.</param>
-        /// <param name="Type">The type of the barcode.</param>
-        public Barcode(double? ConfidenceLevel = null, int? PageNo = null, List<BarcodeCoordinate> Coordinates = null, string Text = null, TypeEnum? Type = null)
+        public Barcode(List<BarcodeCoordinate> Coordinates = null)
         {
-            this.ConfidenceLevel = ConfidenceLevel;
-            this.PageNo = PageNo;
             this.Coordinates = Coordinates;
-            this.Text = Text;
-            this.Type = Type;
         }
         
         /// <summary>
@@ -196,13 +188,13 @@ namespace Sphereon.SDK.Barcode.Model
         /// </summary>
         /// <value>The confidence level of the barcode</value>
         [DataMember(Name="confidenceLevel", EmitDefaultValue=false)]
-        public double? ConfidenceLevel { get; set; }
+        public double? ConfidenceLevel { get; private set; }
         /// <summary>
         /// The number of the page the barcode is on
         /// </summary>
         /// <value>The number of the page the barcode is on</value>
         [DataMember(Name="pageNo", EmitDefaultValue=false)]
-        public int? PageNo { get; set; }
+        public int? PageNo { get; private set; }
         /// <summary>
         /// The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.
         /// </summary>
@@ -214,7 +206,7 @@ namespace Sphereon.SDK.Barcode.Model
         /// </summary>
         /// <value>The text of the barcode</value>
         [DataMember(Name="text", EmitDefaultValue=false)]
-        public string Text { get; set; }
+        public string Text { get; private set; }
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

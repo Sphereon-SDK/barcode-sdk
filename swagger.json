@@ -6,16 +6,16 @@
         "summary": "Job definition and state",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Get the Detector job definition and current state. Please note that you can differentiate based on http response status",
+        "description": "Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status",
         "operationId": "getJob",
         "responses": {
           "200": {
-            "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-            "description": "Detector job returned and Job is done or in error"
+            "schema": {"$ref": "#/definitions/ReaderResultJobResponse"},
+            "description": "Read job returned and Job is done or in error"
           },
           "202": {
             "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-            "description": "Detector job returned and Job is still processing"
+            "description": "Read job returned and Job is still processing"
           },
           "404": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
@@ -36,12 +36,12 @@
         "summary": "Delete a job manually",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Delete the Detector Job and all related files",
+        "description": "Delete the Job and all related files",
         "operationId": "deleteJob",
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-            "description": "Detector job is deleted"
+            "description": "Job is deleted"
           },
           "400": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
@@ -63,7 +63,7 @@
         "consumes": ["application/json"]
       },
       "put": {
-        "summary": "Submit Detector job for processing",
+        "summary": "Submit job for reading",
         "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
         "description": "Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request",
@@ -71,7 +71,7 @@
         "responses": {
           "200": {
             "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-            "description": "Detection job submitted"
+            "description": "Read job submitted"
           },
           "400": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
@@ -110,7 +110,7 @@
       "operationId": "uploadFile",
       "responses": {"200": {
         "schema": {"$ref": "#/definitions/ReaderJobResponse"},
-        "description": "File uploaded successfully. Detector job created but not started yet"
+        "description": "File uploaded successfully. Reader job created but not started yet"
       }},
       "parameters": [{
         "in": "formData",
@@ -158,24 +158,29 @@
         "confidenceLevel": {
           "format": "double",
           "description": "The confidence level of the barcode",
+          "readOnly": true,
           "type": "number"
         },
         "pageNo": {
           "format": "int32",
           "description": "The number of the page the barcode is on",
+          "readOnly": true,
           "type": "integer"
         },
         "coordinates": {
           "description": "The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.",
+          "readOnly": true,
           "type": "array",
           "items": {"$ref": "#/definitions/BarcodeCoordinate"}
         },
         "text": {
           "description": "The text of the barcode",
+          "readOnly": true,
           "type": "string"
         },
         "type": {
           "description": "The type of the barcode",
+          "readOnly": true,
           "type": "string",
           "enum": [
             "AZTEC",
@@ -254,10 +259,6 @@
         "status"
       ],
       "properties": {
-        "detectorTasks": {
-          "type": "array",
-          "items": {"$ref": "#/definitions/ReaderEngineTask"}
-        },
         "completionTime": {
           "format": "date-time",
           "description": "The completion date/time of this job in ISO 8601 format",
@@ -282,17 +283,17 @@
           "readOnly": true,
           "type": "string"
         },
-        "barcodes": {
-          "description": "The returned barcodes",
-          "readOnly": true,
-          "type": "array",
-          "items": {"$ref": "#/definitions/Barcode"}
-        },
         "job": {"$ref": "#/definitions/ReaderJob"},
         "statusMessage": {
           "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
           "readOnly": true,
           "type": "string"
+        },
+        "tasks": {
+          "description": "The server supplied reader task(s)",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/ReaderEngineTask"}
         },
         "queueTime": {
           "format": "date-time",
@@ -367,6 +368,77 @@
         }
       }
     },
+    "ReaderResultJobResponse": {
+      "description": "The Reader job response. Has access to the job, it' s settings as well as engine tasks",
+      "type": "object",
+      "required": [
+        "barcodes",
+        "inputs",
+        "status"
+      ],
+      "properties": {
+        "completionTime": {
+          "format": "date-time",
+          "description": "The completion date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "jobId": {"type": "string"},
+        "creationTime": {
+          "format": "date-time",
+          "description": "The creation date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "inputs": {
+          "description": "The original input files. Currently supported inputs are: tif files",
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "updateTime": {
+          "format": "date-time",
+          "description": "The last update date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "barcodes": {
+          "description": "The returned barcodes",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/Barcode"}
+        },
+        "job": {"$ref": "#/definitions/ReaderJob"},
+        "statusMessage": {
+          "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tasks": {
+          "description": "The server supplied reader task(s)",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/ReaderEngineTask"}
+        },
+        "queueTime": {
+          "format": "date-time",
+          "description": "The reader queue date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the job",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "INPUTS_UPLOADED",
+            "PROCESSING",
+            "DONE",
+            "ERROR",
+            "DELETED"
+          ]
+        }
+      }
+    },
     "ReaderJob": {
       "description": "The Detector job. Has access to the job settings.",
       "type": "object",
@@ -383,6 +455,8 @@
       "type": "object",
       "properties": {
         "anchor": {
+          "description": "The anchor to which the positions apply",
+          "readOnly": true,
           "type": "string",
           "enum": [
             "LEFT_TOP",
@@ -395,10 +469,14 @@
         },
         "x": {
           "format": "int32",
+          "description": "The X position",
+          "readOnly": true,
           "type": "integer"
         },
         "y": {
           "format": "int32",
+          "description": "The Y position",
+          "readOnly": true,
           "type": "integer"
         }
       }

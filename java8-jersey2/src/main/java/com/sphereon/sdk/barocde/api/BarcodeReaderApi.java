@@ -9,6 +9,7 @@ import javax.ws.rs.core.GenericType;
 
 import com.sphereon.sdk.barocde.model.ReaderJobResponse;
 import com.sphereon.sdk.barocde.model.ErrorResponse;
+import com.sphereon.sdk.barocde.model.ReaderResultJobResponse;
 import com.sphereon.sdk.barocde.model.ReaderJob;
 import java.io.File;
 
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:39:08.056+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:26.286+02:00")
 public class BarcodeReaderApi {
   private ApiClient apiClient;
 
@@ -39,7 +40,7 @@ public class BarcodeReaderApi {
 
   /**
    * Delete a job manually
-   * Delete the Detector Job and all related files
+   * Delete the Job and all related files
    * @param jobid jobid (required)
    * @return ReaderJobResponse
    * @throws ApiException if fails to make API call
@@ -81,12 +82,12 @@ public class BarcodeReaderApi {
       }
   /**
    * Job definition and state
-   * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+   * Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status
    * @param jobid jobid (required)
-   * @return ReaderJobResponse
+   * @return ReaderResultJobResponse
    * @throws ApiException if fails to make API call
    */
-  public ReaderJobResponse getJob(String jobid) throws ApiException {
+  public ReaderResultJobResponse getJob(String jobid) throws ApiException {
     Object localVarPostBody = null;
     
     // verify the required parameter 'jobid' is set
@@ -118,11 +119,11 @@ public class BarcodeReaderApi {
 
     String[] localVarAuthNames = new String[] { "oauth2schema" };
 
-    GenericType<ReaderJobResponse> localVarReturnType = new GenericType<ReaderJobResponse>() {};
+    GenericType<ReaderResultJobResponse> localVarReturnType = new GenericType<ReaderResultJobResponse>() {};
     return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
       }
   /**
-   * Submit Detector job for processing
+   * Submit job for reading
    * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
    * @param jobid jobid (required)
    * @param job jobEntity (required)

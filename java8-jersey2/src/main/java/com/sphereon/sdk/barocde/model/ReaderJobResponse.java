@@ -28,7 +28,6 @@ package com.sphereon.sdk.barocde.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.sphereon.sdk.barocde.model.Barcode;
 import com.sphereon.sdk.barocde.model.ReaderEngineTask;
 import com.sphereon.sdk.barocde.model.ReaderJob;
 import io.swagger.annotations.ApiModel;
@@ -41,11 +40,8 @@ import java.util.List;
  * The Reader job response. Has access to the job, it&#39; s settings as well as engine tasks
  */
 @ApiModel(description = "The Reader job response. Has access to the job, it' s settings as well as engine tasks")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-21T02:39:08.056+02:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2017-06-22T18:04:26.286+02:00")
 public class ReaderJobResponse {
-  @JsonProperty("detectorTasks")
-  private List<ReaderEngineTask> detectorTasks = new ArrayList<ReaderEngineTask>();
-
   @JsonProperty("completionTime")
   private OffsetDateTime completionTime = null;
 
@@ -61,14 +57,14 @@ public class ReaderJobResponse {
   @JsonProperty("updateTime")
   private OffsetDateTime updateTime = null;
 
-  @JsonProperty("barcodes")
-  private List<Barcode> barcodes = new ArrayList<Barcode>();
-
   @JsonProperty("job")
   private ReaderJob job = null;
 
   @JsonProperty("statusMessage")
   private String statusMessage = null;
+
+  @JsonProperty("tasks")
+  private List<ReaderEngineTask> tasks = new ArrayList<ReaderEngineTask>();
 
   @JsonProperty("queueTime")
   private OffsetDateTime queueTime = null;
@@ -111,29 +107,6 @@ public class ReaderJobResponse {
 
   @JsonProperty("status")
   private StatusEnum status = null;
-
-  public ReaderJobResponse detectorTasks(List<ReaderEngineTask> detectorTasks) {
-    this.detectorTasks = detectorTasks;
-    return this;
-  }
-
-  public ReaderJobResponse addDetectorTasksItem(ReaderEngineTask detectorTasksItem) {
-    this.detectorTasks.add(detectorTasksItem);
-    return this;
-  }
-
-   /**
-   * Get detectorTasks
-   * @return detectorTasks
-  **/
-  @ApiModelProperty(example = "null", value = "")
-  public List<ReaderEngineTask> getDetectorTasks() {
-    return detectorTasks;
-  }
-
-  public void setDetectorTasks(List<ReaderEngineTask> detectorTasks) {
-    this.detectorTasks = detectorTasks;
-  }
 
    /**
    * The completion date/time of this job in ISO 8601 format
@@ -203,29 +176,6 @@ public class ReaderJobResponse {
     return updateTime;
   }
 
-  public ReaderJobResponse barcodes(List<Barcode> barcodes) {
-    this.barcodes = barcodes;
-    return this;
-  }
-
-  public ReaderJobResponse addBarcodesItem(Barcode barcodesItem) {
-    this.barcodes.add(barcodesItem);
-    return this;
-  }
-
-   /**
-   * The returned barcodes
-   * @return barcodes
-  **/
-  @ApiModelProperty(example = "null", value = "The returned barcodes")
-  public List<Barcode> getBarcodes() {
-    return barcodes;
-  }
-
-  public void setBarcodes(List<Barcode> barcodes) {
-    this.barcodes = barcodes;
-  }
-
   public ReaderJobResponse job(ReaderJob job) {
     this.job = job;
     return this;
@@ -251,6 +201,29 @@ public class ReaderJobResponse {
   @ApiModelProperty(example = "null", value = "A status message, which can be informational, warning or error. A message here does not indicate an error perse")
   public String getStatusMessage() {
     return statusMessage;
+  }
+
+  public ReaderJobResponse tasks(List<ReaderEngineTask> tasks) {
+    this.tasks = tasks;
+    return this;
+  }
+
+  public ReaderJobResponse addTasksItem(ReaderEngineTask tasksItem) {
+    this.tasks.add(tasksItem);
+    return this;
+  }
+
+   /**
+   * The server supplied reader task(s)
+   * @return tasks
+  **/
+  @ApiModelProperty(example = "null", value = "The server supplied reader task(s)")
+  public List<ReaderEngineTask> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(List<ReaderEngineTask> tasks) {
+    this.tasks = tasks;
   }
 
    /**
@@ -281,22 +254,21 @@ public class ReaderJobResponse {
       return false;
     }
     ReaderJobResponse readerJobResponse = (ReaderJobResponse) o;
-    return Objects.equals(this.detectorTasks, readerJobResponse.detectorTasks) &&
-        Objects.equals(this.completionTime, readerJobResponse.completionTime) &&
+    return Objects.equals(this.completionTime, readerJobResponse.completionTime) &&
         Objects.equals(this.jobId, readerJobResponse.jobId) &&
         Objects.equals(this.creationTime, readerJobResponse.creationTime) &&
         Objects.equals(this.inputs, readerJobResponse.inputs) &&
         Objects.equals(this.updateTime, readerJobResponse.updateTime) &&
-        Objects.equals(this.barcodes, readerJobResponse.barcodes) &&
         Objects.equals(this.job, readerJobResponse.job) &&
         Objects.equals(this.statusMessage, readerJobResponse.statusMessage) &&
+        Objects.equals(this.tasks, readerJobResponse.tasks) &&
         Objects.equals(this.queueTime, readerJobResponse.queueTime) &&
         Objects.equals(this.status, readerJobResponse.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(detectorTasks, completionTime, jobId, creationTime, inputs, updateTime, barcodes, job, statusMessage, queueTime, status);
+    return Objects.hash(completionTime, jobId, creationTime, inputs, updateTime, job, statusMessage, tasks, queueTime, status);
   }
 
 
@@ -305,15 +277,14 @@ public class ReaderJobResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReaderJobResponse {\n");
     
-    sb.append("    detectorTasks: ").append(toIndentedString(detectorTasks)).append("\n");
     sb.append("    completionTime: ").append(toIndentedString(completionTime)).append("\n");
     sb.append("    jobId: ").append(toIndentedString(jobId)).append("\n");
     sb.append("    creationTime: ").append(toIndentedString(creationTime)).append("\n");
     sb.append("    inputs: ").append(toIndentedString(inputs)).append("\n");
     sb.append("    updateTime: ").append(toIndentedString(updateTime)).append("\n");
-    sb.append("    barcodes: ").append(toIndentedString(barcodes)).append("\n");
     sb.append("    job: ").append(toIndentedString(job)).append("\n");
     sb.append("    statusMessage: ").append(toIndentedString(statusMessage)).append("\n");
+    sb.append("    tasks: ").append(toIndentedString(tasks)).append("\n");
     sb.append("    queueTime: ").append(toIndentedString(queueTime)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
