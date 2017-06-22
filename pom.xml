@@ -18,27 +18,64 @@
         <!--<jodatime-version>2.9.3</jodatime-version>-->
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.12</junit-version>
-        <api-version>0.1.0</api-version>
-
 
         <sdk-package>com.sphereon.sdk.barocde</sdk-package>
         <sdk-package-javascript>SphereonSDKBarcode</sdk-package-javascript>
         <sdk-package-csharp>Sphereon.SDK.Barcode</sdk-package-csharp>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-scm-provider-gitexe.version>1.9.5</maven-scm-provider-gitexe.version>
     </properties>
 
     <distributionManagement>
         <repository>
-            <id>sphereon-sdk</id>
-            <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk</url>
+            <id>sphereon-sdk-releases</id>
+            <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-releases</url>
         </repository>
+        <snapshotRepository>
+            <id>sphereon-sdk-snapshots</id>
+            <url>http://nexus.qa.sphereon.com/nexus/content/repositories/sphereon-sdk-snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
-    <profiles>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven-release-plugin.version}</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <!-- Keep changes in the local repo, push will be done afterwards -->
+                    <pushChanges>false</pushChanges>
+                    <localCheckout>true</localCheckout>
+                    <!-- Use a better name for the tag -->
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>${maven-scm-provider-gitexe.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <!-- optional configuration -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
+
+
+    <profiles>
         <profile>
             <id>html-docs</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -89,7 +126,7 @@
         <profile>
             <id>java8-okhttp-gson</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <okhttp-version>2.7.5</okhttp-version>
@@ -161,7 +198,7 @@
         <profile>
             <id>java8-jersey2</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <jersey-version>2.22.2</jersey-version>
@@ -259,90 +296,12 @@
         </profile>
 
 
-        <profile>
-            <id>java8-retrofit2</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <oltu-version>1.0.1</oltu-version>
-                <retrofit-version>2.1.0</retrofit-version>
-            </properties>
-            <build>
-                <plugins>
-                    <!-- activate the plugin -->
-                    <plugin>
-                        <groupId>io.swagger</groupId>
-                        <artifactId>swagger-codegen-maven-plugin</artifactId>
-                        <version>2.2.2-SNAPSHOT</version>
-
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.squareup.retrofit2</groupId>
-                                <artifactId>converter-gson</artifactId>
-                                <version>${retrofit-version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.squareup.retrofit2</groupId>
-                                <artifactId>retrofit</artifactId>
-                                <version>${retrofit-version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.squareup.retrofit2</groupId>
-                                <artifactId>converter-scalars</artifactId>
-                                <version>${retrofit-version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.apache.oltu.oauth2</groupId>
-                                <artifactId>org.apache.oltu.oauth2.client</artifactId>
-                                <version>${oltu-version}</version>
-                            </dependency>
-                        </dependencies>
-                        <executions>
-
-                            <execution>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <configuration>
-                                    <!-- specify the swagger yaml -->
-                                    <inputSpec>swagger.json</inputSpec>
-                                    <!--<inputSpec>https://store.sphereon.com/store/api-docs/admin/PDF/${api-version}</inputSpec>-->
-
-
-                                    <!-- target to generate -->
-                                    <language>java</language>
-
-                                    <!-- pass any necessary config options -->
-                                    <configOptions>
-                                        <dateLibrary>java8</dateLibrary>
-                                    </configOptions>
-
-                                    <!-- override the default library to jersey2 -->
-                                    <library>retrofit2</library>
-                                    <verbose>true</verbose>
-
-                                    <output>${project.basedir}/java8-retrofit2</output>
-                                    <groupId>com.sphereon.sdk</groupId>
-                                    <artifactId>barcode-sdk-java8-retrofit2</artifactId>
-                                    <artifactVersion>${project.version}</artifactVersion>
-                                    <addCompileSourceRoot>true</addCompileSourceRoot>
-                                    <apiPackage>${sdk-package}.api</apiPackage>
-                                    <modelPackage>${sdk-package}.model</modelPackage>
-                                    <invokerPackage>${sdk-package}.handler</invokerPackage>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
 
         <profile>
             <id>csharp-net45</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -404,7 +363,7 @@
         <profile>
             <id>javascript</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
