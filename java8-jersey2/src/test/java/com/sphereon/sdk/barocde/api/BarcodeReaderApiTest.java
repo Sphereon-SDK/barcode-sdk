@@ -26,88 +26,145 @@
 package com.sphereon.sdk.barocde.api;
 
 import com.sphereon.sdk.barocde.handler.ApiException;
-import com.sphereon.sdk.barocde.model.ReaderJobResponse;
-import com.sphereon.sdk.barocde.model.ErrorResponse;
+import com.sphereon.sdk.barocde.model.Barcode;
 import com.sphereon.sdk.barocde.model.ReaderJob;
-import java.io.File;
+import com.sphereon.sdk.barocde.model.ReaderJobResponse;
+import com.sphereon.sdk.barocde.model.ReaderJobSettings;
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.PostConstruct;
+import java.io.File;
+import java.net.URL;
 
 /**
  * API tests for BarcodeReaderApi
  */
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BarcodeReaderApiTest {
+    private static final URL BARCODE_URL = BarcodeReaderApiTest.class.getResource("/barcodes.tif");
+    private static final String ACCESS_TOKEN = "0dbd17f1-c108-350e-807e-42d13e543b32";
 
-    private final BarcodeReaderApi api = new BarcodeReaderApi();
+    private static final BarcodeReaderApi api = new BarcodeReaderApi();
 
-    
-    /**
-     * Delete a job manually
-     *
-     * Delete the Detector Job and all related files
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void deleteJobTest() throws ApiException {
-        String jobid = null;
-        // ReaderJobResponse response = api.deleteJob(jobid);
+    private static String jobId;
+    private static ReaderJob job;
 
-        // TODO: test validations
+    @PostConstruct
+    protected void init() {
+
     }
-    
-    /**
-     * Job definition and state
-     *
-     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void getJobTest() throws ApiException {
-        String jobid = null;
-        // ReaderJobResponse response = api.getJob(jobid);
 
-        // TODO: test validations
-    }
-    
-    /**
-     * Submit Detector job for processing
-     *
-     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void submitJobTest() throws ApiException {
-        String jobid = null;
-        ReaderJob job = null;
-        // ReaderJobResponse response = api.submitJob(jobid, job);
 
-        // TODO: test validations
-    }
-    
     /**
      * Upload the file
-     *
+     * <p>
      * Upload the  image.
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
-    public void uploadFileTest() throws ApiException {
-        File stream = null;
-        // ReaderJobResponse response = api.uploadFile(stream);
+    public void _01_uploadFileTest() throws ApiException {
+        api.getApiClient().setAccessToken(ACCESS_TOKEN);
 
-        // TODO: test validations
+        File stream = new File(BARCODE_URL.getFile());
+        ReaderJobResponse response = api.uploadFile(stream);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(0, response.getBarcodes().size());
+        Assert.assertNotNull(response.getJobId());
+        Assert.assertEquals(ReaderJobResponse.StatusEnum.INPUTS_UPLOADED, response.getStatus());
+        BarcodeReaderApiTest.jobId = response.getJobId();
+        BarcodeReaderApiTest.job = response.getJob();
+
+        //TODO SPMS-9 Return default engine in job response
+        BarcodeReaderApiTest.job.getSettings().engine(ReaderJobSettings.EngineEnum.ADVANCED);
     }
-    
+
+
+    /**
+     * Job definition and state
+     * <p>
+     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _02_getJobTestBeforeSubmit() throws ApiException {
+        ReaderJobResponse response = api.getJob(jobId);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(jobId, response.getJobId());
+        Assert.assertEquals(ReaderJobResponse.StatusEnum.INPUTS_UPLOADED, response.getStatus());
+    }
+
+    /**
+     * Submit Detector job for processing
+     * <p>
+     * Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _03_submitJobTest() throws ApiException {
+        ReaderJobResponse response = api.submitJob(jobId, job);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(ReaderJobResponse.StatusEnum.PROCESSING, response.getStatus());
+    }
+
+    /**
+     * Job definition and state
+     * <p>
+     * Get the Detector job definition and current state. Please note that you can differentiate based on http response status
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _04_getJobTestAfterSubmit() throws ApiException {
+        ReaderJobResponse response = api.getJob(jobId);
+        Assert.assertNotNull(response);
+
+        final int maxCount = 100;
+        int currentCount = 0;
+
+        while (currentCount++ < maxCount && ReaderJobResponse.StatusEnum.PROCESSING == response.getStatus()) {
+            response = api.getJob(jobId);
+            Assert.assertTrue(ReaderJobResponse.StatusEnum.PROCESSING == response.getStatus() || ReaderJobResponse.StatusEnum.DONE == response.getStatus());
+        }
+        Assert.assertEquals(ReaderJobResponse.StatusEnum.DONE, response.getStatus());
+        Assert.assertEquals(3, response.getBarcodes().size());
+        Assert.assertEquals(Barcode.TypeEnum.CODE_39, response.getBarcodes().get(0).getType());
+        Assert.assertEquals("++SCANUSER+NIELS", response.getBarcodes().get(0).getText());
+    }
+
+
+    /**
+     * Delete a job manually
+     * <p>
+     * Delete the Detector Job and all related files
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void _05_deleteJobTest() throws ApiException {
+        ReaderJobResponse response = api.deleteJob(jobId);
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getJobId());
+        Assert.assertEquals(ReaderJobResponse.StatusEnum.DELETED, response.getStatus());
+
+        try {
+            api.getJob(jobId);
+            Assert.fail("After job deletion we should not get here");
+        } catch (ApiException e) {
+            // Normal flow after job deletion and retrieval of already deleted job
+            System.err.println(e.getMessage());
+
+        }
+
+
+    }
+
+
 }
