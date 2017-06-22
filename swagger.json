@@ -1,40 +1,21 @@
 {
   "basePath": "/",
   "paths": {
-    "/barcode/1.0.0/detector": {
-      "post": {
-      "summary": "Upload the file",
-      "produces": ["application/json;charset=UTF-8"],
-      "description": "Upload the  image.",
-      "operationId": "uploadFile",
-      "responses": {"200": {
-        "schema": {"$ref": "#/definitions/DetectorJobResponse"},
-        "description": "File uploaded successfully. Detector job created but not started yet"
-      }},
-      "parameters": [{
-        "in": "formData",
-        "name": "stream",
-        "description": "The first image.",
-        "type": "file",
-        "required": true
-      }],
-      "tags": ["BarcodeDetector"],
-      "consumes": ["multipart/form-data"]
-    }},
-    "/barcode/1.0.0/detector/{jobid}": {
+    "/barcode/0.1.0/reader/{jobid}": {
       "get": {
         "summary": "Job definition and state",
+        "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Get the Detector job definition and current state. Please note that you can differentiate based on http response status",
+        "description": "Get the ReadResult response , job definition and current state. Please note that you can differentiate completion based on http response status",
         "operationId": "getJob",
         "responses": {
           "200": {
-            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
-            "description": "Detector job returned and Job is done or in error"
+            "schema": {"$ref": "#/definitions/ReaderResultJobResponse"},
+            "description": "Read job returned and Job is done or in error"
           },
           "202": {
-            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
-            "description": "Detector job returned and Job is still processing"
+            "schema": {"$ref": "#/definitions/ReaderJobResponse"},
+            "description": "Read job returned and Job is still processing"
           },
           "404": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
@@ -48,18 +29,19 @@
           "type": "string",
           "required": true
         }],
-        "tags": ["BarcodeDetector"],
+        "tags": ["BarcodeReader"],
         "consumes": ["application/json"]
       },
       "delete": {
         "summary": "Delete a job manually",
+        "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
-        "description": "Delete the Detector Job and all related files",
+        "description": "Delete the Job and all related files",
         "operationId": "deleteJob",
         "responses": {
           "200": {
-            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
-            "description": "Detector job is deleted"
+            "schema": {"$ref": "#/definitions/ReaderJobResponse"},
+            "description": "Job is deleted"
           },
           "400": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
@@ -77,18 +59,19 @@
           "type": "string",
           "required": true
         }],
-        "tags": ["BarcodeDetector"],
+        "tags": ["BarcodeReader"],
         "consumes": ["application/json"]
       },
       "put": {
-        "summary": "Submit Detector job for processing",
+        "summary": "Submit job for reading",
+        "security": [{"oauth2schema": ["global"]}],
         "produces": ["application/json;charset=UTF-8"],
         "description": "Starts the barcode detection of the uploaded files, using the supplied settings associated with the job in the request body. You can only submit the job after a new Job is created with status INPUTS_UPLOADED or resubmit an existing Job with status ERROR. In all cases the jobId in the path must match the jobId in the request",
         "operationId": "submitJob",
         "responses": {
           "200": {
-            "schema": {"$ref": "#/definitions/DetectorJobResponse"},
-            "description": "Detection job submitted"
+            "schema": {"$ref": "#/definitions/ReaderJobResponse"},
+            "description": "Read job submitted"
           },
           "400": {
             "schema": {"$ref": "#/definitions/ErrorResponse"},
@@ -108,17 +91,37 @@
             "required": true
           },
           {
-            "schema": {"$ref": "#/definitions/DetectorJob"},
+            "schema": {"$ref": "#/definitions/ReaderJob"},
             "in": "body",
             "name": "job",
             "description": "jobEntity",
             "required": true
           }
         ],
-        "tags": ["BarcodeDetector"],
+        "tags": ["BarcodeReader"],
         "consumes": ["application/json;charset=UTF-8"]
       }
-    }
+    },
+    "/barcode/0.1.0/reader": {"post": {
+      "summary": "Upload the file",
+      "security": [{"oauth2schema": ["global"]}],
+      "produces": ["application/json;charset=UTF-8"],
+      "description": "Upload the  image.",
+      "operationId": "uploadFile",
+      "responses": {"200": {
+        "schema": {"$ref": "#/definitions/ReaderJobResponse"},
+        "description": "File uploaded successfully. Reader job created but not started yet"
+      }},
+      "parameters": [{
+        "in": "formData",
+        "name": "stream",
+        "description": "The first image.",
+        "type": "file",
+        "required": true
+      }],
+      "tags": ["BarcodeReader"],
+      "consumes": ["multipart/form-data"]
+    }}
   },
   "host": "gw.api.cloud.sphereon.com",
   "schemes": ["https"],
@@ -129,30 +132,55 @@
     "flow": "application"
   }},
   "definitions": {
+    "ReaderJobSettings": {
+      "description": "Barcode reader settings",
+      "type": "object",
+      "properties": {
+        "lifecycle": {"$ref": "#/definitions/Lifecycle"},
+        "outputFileName": {"type": "string"},
+        "engine": {
+          "type": "string",
+          "enum": [
+            "BASIC",
+            "ADVANCED",
+            "PREMIUM"
+          ]
+        },
+        "outputFileFormat": {
+          "type": "string",
+          "enum": ["JSON"]
+        }
+      }
+    },
     "Barcode": {
       "type": "object",
       "properties": {
         "confidenceLevel": {
           "format": "double",
           "description": "The confidence level of the barcode",
+          "readOnly": true,
           "type": "number"
         },
         "pageNo": {
           "format": "int32",
           "description": "The number of the page the barcode is on",
+          "readOnly": true,
           "type": "integer"
         },
         "coordinates": {
           "description": "The coordinates of the barcode. There are usually 2 coordinates, with an x and y value and an anchor.",
+          "readOnly": true,
           "type": "array",
           "items": {"$ref": "#/definitions/BarcodeCoordinate"}
         },
         "text": {
           "description": "The text of the barcode",
+          "readOnly": true,
           "type": "string"
         },
         "type": {
           "description": "The type of the barcode",
+          "readOnly": true,
           "type": "string",
           "enum": [
             "AZTEC",
@@ -179,26 +207,6 @@
         }
       }
     },
-    "DetectorJobSettings": {
-      "description": "Barcode detection settings",
-      "type": "object",
-      "properties": {
-        "lifecycle": {"$ref": "#/definitions/Lifecycle"},
-        "outputFileName": {"type": "string"},
-        "engine": {
-          "type": "string",
-          "enum": [
-            "BASIC",
-            "ADVANCED",
-            "PREMIUM"
-          ]
-        },
-        "outputFileFormat": {
-          "type": "string",
-          "enum": ["JSON"]
-        }
-      }
-    },
     "Lifecycle": {
       "description": "Lifecycle settings. When no lifecycle settings are supplied, the job and files will be deleted directly after retrieval of the file",
       "type": "object",
@@ -221,26 +229,36 @@
         }
       }
     },
-    "DetectorJobResponse": {
-      "description": "The Detector job. Has access to the job settings as well as engine tasks",
+    "Error": {
+      "description": "An error",
+      "type": "object",
+      "required": [
+        "code",
+        "level",
+        "message"
+      ],
+      "properties": {
+        "code": {"type": "string"},
+        "level": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "FATAL"
+          ]
+        },
+        "cause": {"$ref": "#/definitions/Error"},
+        "message": {"type": "string"}
+      }
+    },
+    "ReaderJobResponse": {
+      "description": "The Reader job response. Has access to the job, it' s settings as well as engine tasks",
       "type": "object",
       "required": [
         "inputs",
         "status"
       ],
       "properties": {
-        "detectorTasks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DetectorTask"
-          }
-        },
-        "barcodeResults": {
-          "description": "The returned barcodes",
-          "readOnly": true,
-          "type": "array",
-          "items": {"$ref": "#/definitions/Barcode"}
-        },
         "completionTime": {
           "format": "date-time",
           "description": "The completion date/time of this job in ISO 8601 format",
@@ -265,11 +283,17 @@
           "readOnly": true,
           "type": "string"
         },
-        "job": {"$ref": "#/definitions/DetectorJob"},
+        "job": {"$ref": "#/definitions/ReaderJob"},
         "statusMessage": {
           "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
           "readOnly": true,
           "type": "string"
+        },
+        "tasks": {
+          "description": "The server supplied reader task(s)",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/ReaderEngineTask"}
         },
         "queueTime": {
           "format": "date-time",
@@ -291,47 +315,7 @@
         }
       }
     },
-    "DetectorJob": {
-      "description": "The Detector job. Has access to the job settings.",
-      "type": "object",
-      "required": ["jobId"],
-      "properties": {
-        "jobId": {
-          "description": "The server generated job jobId. This jobId is checked against the jobId in the request path on every invocation",
-          "type": "string"
-        },
-        "settings": {"$ref": "#/definitions/DetectorJobSettings"}
-      }
-    },
-    "Error": {
-      "description": "An error",
-      "type": "object",
-      "required": [
-        "code",
-        "level",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "level": {
-          "type": "string",
-          "enum": [
-            "INFO",
-            "WARNING",
-            "FATAL"
-          ]
-        },
-        "cause": {
-          "$ref": "#/definitions/Error"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "DetectorTask": {
+    "ReaderEngineTask": {
       "type": "object",
       "properties": {
         "jobId": {
@@ -371,7 +355,7 @@
           "type": "string"
         },
         "status": {
-          "description": "The status of the Detector task itself",
+          "description": "The status of the Reader task itself",
           "readOnly": true,
           "type": "string",
           "enum": [
@@ -384,10 +368,95 @@
         }
       }
     },
+    "ReaderResultJobResponse": {
+      "description": "The Reader job response. Has access to the job, it' s settings as well as engine tasks",
+      "type": "object",
+      "required": [
+        "barcodes",
+        "inputs",
+        "status"
+      ],
+      "properties": {
+        "completionTime": {
+          "format": "date-time",
+          "description": "The completion date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "jobId": {"type": "string"},
+        "creationTime": {
+          "format": "date-time",
+          "description": "The creation date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "inputs": {
+          "description": "The original input files. Currently supported inputs are: tif files",
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "updateTime": {
+          "format": "date-time",
+          "description": "The last update date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "barcodes": {
+          "description": "The returned barcodes",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/Barcode"}
+        },
+        "job": {"$ref": "#/definitions/ReaderJob"},
+        "statusMessage": {
+          "description": "A status message, which can be informational, warning or error. A message here does not indicate an error perse",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tasks": {
+          "description": "The server supplied reader task(s)",
+          "readOnly": true,
+          "type": "array",
+          "items": {"$ref": "#/definitions/ReaderEngineTask"}
+        },
+        "queueTime": {
+          "format": "date-time",
+          "description": "The reader queue date/time of this job in ISO 8601 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the job",
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "INPUTS_UPLOADED",
+            "PROCESSING",
+            "DONE",
+            "ERROR",
+            "DELETED"
+          ]
+        }
+      }
+    },
+    "ReaderJob": {
+      "description": "The Detector job. Has access to the job settings.",
+      "type": "object",
+      "required": ["jobId"],
+      "properties": {
+        "jobId": {
+          "description": "The server generated job jobId. This jobId is checked against the jobId in the request path on every invocation",
+          "type": "string"
+        },
+        "settings": {"$ref": "#/definitions/ReaderJobSettings"}
+      }
+    },
     "BarcodeCoordinate": {
       "type": "object",
       "properties": {
         "anchor": {
+          "description": "The anchor to which the positions apply",
+          "readOnly": true,
           "type": "string",
           "enum": [
             "LEFT_TOP",
@@ -400,10 +469,14 @@
         },
         "x": {
           "format": "int32",
+          "description": "The X position",
+          "readOnly": true,
           "type": "integer"
         },
         "y": {
           "format": "int32",
+          "description": "The Y position",
+          "readOnly": true,
           "type": "integer"
         }
       }
@@ -428,13 +501,13 @@
       "url": "https://sphereon.com",
       "email": "dev@sphereon.com"
     },
-    "description": "<b>The Barcode Detection API '/detector' converts barcodes from image files to JSON files.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. First upload an image using the /detector POST endpoint. You will get back a job response that contains a job with its associated settings.\r\n2. Start the job from a PUT request to the /detector/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.\r\n3. Check the job status from the /detector/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version\r\n4. Retrieve the JSON file using the /detector/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
+    "description": "<b>The Barcode Reader API '/reader' reads barcodes from image files and returns the barcode data as JSON files.<\/b>\r\n\r\nThe flow is generally as follows:\r\n1. First upload an image using the /reader POST endpoint. You will get back a job response that contains a job with its associated settings.\r\n2. Start the job from a PUT request to the /reader/{jobid} endpoint, with the Job and Settings JSON as request body. The barcode detection will now start.\r\n3. Check the job status from the /reader/{jobid} GET endpoint until the status has changed to DONE or ERROR. Messaging using a websocket will be available as an alternative in a future version\r\n4. Retrieve the JSON file using the /reader/{jobid}/stream GET endpoint. This will return the JSON file only when the status is DONE. In other cases it will return the Job Response JSON (with http code 202 instead of 200)\r\n\r\n\r\n<b>Interactive testing: <\/b>A web based test console is available in the <a href=\"https://store.sphereon.com\">Sphereon API Store<\/a>",
     "termsOfService": "https://sphereon.com",
-    "title": "Barcode ",
-    "version": "1.0.0"
+    "title": "Barcode",
+    "version": "0.1.0"
   },
   "tags": [{
-    "name": "BarcodeDetector",
-    "description": "Barcode detection API"
+    "name": "BarcodeReader",
+    "description": "Barcode reader API"
   }]
 }

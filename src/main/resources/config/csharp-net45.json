@@ -8,11 +8,11 @@
   "templateDir": "src/main/resources",
   "auth": "hello:world",
   "apiPackage": "Sphereon.SDK.Barcode.Api",
-  "modelPackage": "Sphereon.SDK.Barcode.Model",
+  "modelPackage": "Sphereon.SDK.Barcoed.Model",
   "invokerPackage": "Sphereon.SDK.Barcode.Invoker",
   "groupId": "com.sphereon.sdk",
   "artifactId": "barcode-sdk-csharp-net45",
-  "artifactVersion": "0.1.1-SNAPSHOT",
+  "artifactVersion": "0.1.0-SNAPSHOT",
   "systemProperties": {
     "systemProp1": "value1"
   },
