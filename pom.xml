@@ -19,7 +19,7 @@
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.12</junit-version>
 
-        <sdk-package>com.sphereon.sdk.barocde</sdk-package>
+        <sdk-package>com.sphereon.sdk.barcode</sdk-package>
         <sdk-package-javascript>SphereonSDKBarcode</sdk-package-javascript>
         <sdk-package-csharp>Sphereon.SDK.Barcode</sdk-package-csharp>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
