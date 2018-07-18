@@ -1,5 +1,27 @@
-*.class
+#Project sources
+java8-jersey2/src/main
+java8-okhttp-gson/src/main
+java8-retrofit2/src/main
+csharp-net35/src/Sphereon.SDK.Barcode
+csharp-net45/src/Sphereon.SDK.Barcode
+javascript/src
+html-docs/index.html
+node_modules/
 
+# Visual Studio
+.vs/
+bin/
+obj/
+packages/
+*.ncb
+*.suo
+*ReSharper*
+Debug/
+*.user
+*.lnk
+
+# Java
+*.class
 
 # Package Files #
 *.jar
@@ -14,6 +36,7 @@ log.*
 
 #Intellij
 *.iml
+.idea/
 
 #Maven
 target/
@@ -27,13 +50,4 @@ buildNumber.properties
 .mvn/timing.properties
 
 applog*
-.name
-compiler.xml
-encodings.xml
-Maven__com_brsanthu_migbase64_2_2.xml
-Maven__io_swagger_swagger_annotations_1_5_9.xml
-Maven__junit_junit_4_12.xml
-Maven__org_hamcrest_hamcrest_core_1_3.xml
-misc.xml
-modules.xml
-workspace.xml
+

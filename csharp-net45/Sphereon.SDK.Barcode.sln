@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Barcode", "src\Sphereon.SDK.Barcode\Sphereon.SDK.Barcode.csproj", "{6E131197-D5B2-4142-9A43-8BA7AEB85419}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Barcode", "src\Sphereon.SDK.Barcode\Sphereon.SDK.Barcode.csproj", "{772E6A1F-0DA1-4E65-8A01-E03F6D26790F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphereon.SDK.Barcode.Test", "src\Sphereon.SDK.Barcode.Test\Sphereon.SDK.Barcode.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Debug|Any CPU = Debug|Any CPU
 Release|Any CPU = Release|Any CPU
 EndGlobalSection
 GlobalSection(ProjectConfigurationPlatforms) = postSolution
-{6E131197-D5B2-4142-9A43-8BA7AEB85419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-{6E131197-D5B2-4142-9A43-8BA7AEB85419}.Debug|Any CPU.Build.0 = Debug|Any CPU
-{6E131197-D5B2-4142-9A43-8BA7AEB85419}.Release|Any CPU.ActiveCfg = Release|Any CPU
-{6E131197-D5B2-4142-9A43-8BA7AEB85419}.Release|Any CPU.Build.0 = Release|Any CPU
+{772E6A1F-0DA1-4E65-8A01-E03F6D26790F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+{772E6A1F-0DA1-4E65-8A01-E03F6D26790F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+{772E6A1F-0DA1-4E65-8A01-E03F6D26790F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+{772E6A1F-0DA1-4E65-8A01-E03F6D26790F}.Release|Any CPU.Build.0 = Release|Any CPU
 {19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 {19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 {19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
