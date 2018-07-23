@@ -75,7 +75,7 @@ Contact: dev@sphereon.com
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
       <ProjectReference Include="..\Sphereon.SDK.Barcode\Sphereon.SDK.Barcode.csproj">
-          <Project>{41BC6E0F-08AC-4107-98A0-23AA65181EA7}</Project>
+          <Project>{B58A32B7-7B56-4FBC-B4DA-B227A1D95C21}</Project>
           <Name>Sphereon.SDK.Barcode</Name>
       </ProjectReference>
   </ItemGroup>
